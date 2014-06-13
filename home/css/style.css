@@ -118,7 +118,7 @@ p a{
 }
 .header div#navigation ul li{
 	float:left;
-	width:131px;
+	width:90px;
 	text-align:center;
 }
 .header div#navigation ul li.selected a{
@@ -128,7 +128,7 @@ p a{
 }
 .header div#navigation ul li.selected{
 	background:url(../images/bg-menu-selected.gif) no-repeat center top;
-	width:134px;
+	width:90px;
 }
 .header div#navigation ul li a{
 	font-family: arial;
