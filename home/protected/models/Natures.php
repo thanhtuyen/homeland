@@ -9,7 +9,17 @@
  * @property string $tieude
  * @property string $content
  * @property string $noidung
+ * @property integer $is_public
  * @property integer $genre_nature_id
+ * @property integer $del_flag
+ * @property integer $feature_flag
+ * @property integer $create_user
+ * @property integer $updated_user
+ * @property integer $create_date
+ * @property integer $updated_date
+ * @property string $image
+ * @property string $video
+ * @property string $file
  */
 class Natures extends CActiveRecord
 {
@@ -29,11 +39,13 @@ class Natures extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, tieude, content, noidung, genre_nature_id', 'required'),
-			array('genre_nature_id', 'numerical', 'integerOnly'=>true),
+			array('create_user, updated_user, create_date, updated_date, image, video, file', 'required'),
+			array('is_public, genre_nature_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date', 'numerical', 'integerOnly'=>true),
+			array('image, video, file', 'length', 'max'=>256),
+			array('title, tieude, content, noidung', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, tieude, content, noidung, genre_nature_id', 'safe', 'on'=>'search'),
+			array('id, title, tieude, content, noidung, is_public, genre_nature_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date, image, video, file', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,7 +71,17 @@ class Natures extends CActiveRecord
 			'tieude' => 'Tieude',
 			'content' => 'Content',
 			'noidung' => 'Noidung',
+			'is_public' => 'Is Public',
 			'genre_nature_id' => 'Genre Nature',
+			'del_flag' => 'Del Flag',
+			'feature_flag' => 'Feature Flag',
+			'create_user' => 'Create User',
+			'updated_user' => 'Updated User',
+			'create_date' => 'Create Date',
+			'updated_date' => 'Updated Date',
+			'image' => 'Image',
+			'video' => 'Video',
+			'file' => 'File',
 		);
 	}
 
@@ -86,7 +108,17 @@ class Natures extends CActiveRecord
 		$criteria->compare('tieude',$this->tieude,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('noidung',$this->noidung,true);
+		$criteria->compare('is_public',$this->is_public);
 		$criteria->compare('genre_nature_id',$this->genre_nature_id);
+		$criteria->compare('del_flag',$this->del_flag);
+		$criteria->compare('feature_flag',$this->feature_flag);
+		$criteria->compare('create_user',$this->create_user);
+		$criteria->compare('updated_user',$this->updated_user);
+		$criteria->compare('create_date',$this->create_date);
+		$criteria->compare('updated_date',$this->updated_date);
+		$criteria->compare('image',$this->image,true);
+		$criteria->compare('video',$this->video,true);
+		$criteria->compare('file',$this->file,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

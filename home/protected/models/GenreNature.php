@@ -5,8 +5,14 @@
  *
  * The followings are the available columns in table 'genre_nature':
  * @property integer $id
- * @property string $description
- * @property string $mota
+ * @property string $name
+ * @property string $tieude
+ * @property integer $priority
+ * @property integer $del_flag
+ * @property integer $create_user
+ * @property integer $updated_user
+ * @property integer $create_date
+ * @property integer $updated_date
  */
 class GenreNature extends CActiveRecord
 {
@@ -26,11 +32,12 @@ class GenreNature extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('description, mota', 'required'),
-			array('description, mota', 'length', 'max'=>256),
+			array('name, tieude, priority, create_user, updated_user, create_date, updated_date', 'required'),
+			array('priority, del_flag, create_user, updated_user, create_date, updated_date', 'numerical', 'integerOnly'=>true),
+			array('name, tieude', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, description, mota', 'safe', 'on'=>'search'),
+			array('id, name, tieude, priority, del_flag, create_user, updated_user, create_date, updated_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,8 +59,14 @@ class GenreNature extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'description' => 'Description',
-			'mota' => 'Mota',
+			'name' => 'Name',
+			'tieude' => 'Tieude',
+			'priority' => 'Priority',
+			'del_flag' => 'Del Flag',
+			'create_user' => 'Create User',
+			'updated_user' => 'Updated User',
+			'create_date' => 'Create Date',
+			'updated_date' => 'Updated Date',
 		);
 	}
 
@@ -76,8 +89,14 @@ class GenreNature extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('mota',$this->mota,true);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('tieude',$this->tieude,true);
+		$criteria->compare('priority',$this->priority);
+		$criteria->compare('del_flag',$this->del_flag);
+		$criteria->compare('create_user',$this->create_user);
+		$criteria->compare('updated_user',$this->updated_user);
+		$criteria->compare('create_date',$this->create_date);
+		$criteria->compare('updated_date',$this->updated_date);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
