@@ -1,6 +1,6 @@
 <?php
-/* @var $this NaturesController */
-/* @var $data Natures */
+/* @var $this TravelController */
+/* @var $data Travel */
 ?>
 
 <div class="view">

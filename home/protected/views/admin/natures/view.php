@@ -27,7 +27,7 @@ $this->menu=array(
 		'content',
 		'noidung',
 		'is_public',
-		'genre_nature_id',
+		'category_id',
 		'del_flag',
 		'feature_flag',
 		'create_user',

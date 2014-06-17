@@ -14,6 +14,7 @@
 
 <!--	<link rel="stylesheet" type="text/css" href="--><?php //echo Yii::app()->request->baseUrl; ?><!--/css/main.css" />-->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin.css" />
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -49,14 +50,31 @@
             'class' => 'booster.widgets.TbMenu',
             'type' => 'navbar',
             'items' => array(
-//              array('label' => 'Home', 'url' => '/admin.php/site/index'),
+
               array(
-                'label' => 'Thiên nhiên',
+                'label' => 'Menu',
                 'items' => array(
-                  array('label' => 'Tạo mới', 'url' => '/admin.php/genreNature/create'),
-                  array('label' => 'Quản lý', 'url' => '/admin.php/genreNature/admin')
+                  array('label' => 'Tạo mới', 'url' => '/admin.php/category/create'),
+                  array('label' => 'Quản lý', 'url' => '/admin.php/category/admin')
                 )
               ),
+              array('label' => 'Thiên nhiên', 'url' => '/admin.php/natures/index'),
+              array('label' => 'Food', 'url' => '/admin.php/food/index'),
+
+//              array(
+//                'label' => 'Thiên nhiên',
+//                'items' => array(
+//                  array('label' => 'Tạo mới', 'url' => '/admin.php/natures/create'),
+//                  array('label' => 'Quản lý', 'url' => '/admin.php/natures/admin')
+//                )
+//              ),
+//              array(
+//                'label' => 'Food',
+//                'items' => array(
+//                  array('label' => 'Tạo mới', 'url' => '/admin.php/food/create'),
+//                  array('label' => 'Quản lý', 'url' => '/admin.php/food/admin')
+//                )
+//              ),
             )
           )
         )

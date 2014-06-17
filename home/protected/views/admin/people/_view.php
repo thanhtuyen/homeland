@@ -1,6 +1,6 @@
 <?php
-/* @var $this NaturesController */
-/* @var $data Natures */
+/* @var $this PeopleController */
+/* @var $data People */
 ?>
 
 <div class="view">

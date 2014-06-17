@@ -1,6 +1,6 @@
 <?php
 
-class NaturesController extends Controller
+class SpecialtiesController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -32,7 +32,7 @@ class NaturesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'admin'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -62,14 +62,14 @@ class NaturesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Natures;
+		$model=new Specialties;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Natures']))
+		if(isset($_POST['Specialties']))
 		{
-			$model->attributes=$_POST['Natures'];
+			$model->attributes=$_POST['Specialties'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -91,9 +91,9 @@ class NaturesController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Natures']))
+		if(isset($_POST['Specialties']))
 		{
-			$model->attributes=$_POST['Natures'];
+			$model->attributes=$_POST['Specialties'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -122,7 +122,7 @@ class NaturesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Natures');
+		$dataProvider=new CActiveDataProvider('Specialties');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +133,10 @@ class NaturesController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Natures('search');
+		$model=new Specialties('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Natures']))
-			$model->attributes=$_GET['Natures'];
+		if(isset($_GET['Specialties']))
+			$model->attributes=$_GET['Specialties'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,12 +147,12 @@ class NaturesController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Natures the loaded model
+	 * @return Specialties the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Natures::model()->findByPk($id);
+		$model=Specialties::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -160,11 +160,11 @@ class NaturesController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Natures $model the model to be validated
+	 * @param Specialties $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='natures-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='specialties-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

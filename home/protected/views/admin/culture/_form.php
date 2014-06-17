@@ -1,13 +1,13 @@
 <?php
-/* @var $this NaturesController */
-/* @var $model Natures */
+/* @var $this CultureController */
+/* @var $model Culture */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'natures-form',
+	'id'=>'culture-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.

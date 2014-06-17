@@ -1,6 +1,6 @@
 <?php
 
-class NaturesController extends Controller
+class CategoryController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -62,14 +62,18 @@ class NaturesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Natures;
+		$model=new Category;
+    $model->setAttribute('priority', 1);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Natures']))
+		if(isset($_POST['Category']))
 		{
-			$model->attributes=$_POST['Natures'];
+			$model->attributes=$_POST['Category'];
+      $model->create_date = time();
+      $model->create_user =  1;
+     // echo $model->parent_id;die;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -91,9 +95,9 @@ class NaturesController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Natures']))
+		if(isset($_POST['Category']))
 		{
-			$model->attributes=$_POST['Natures'];
+			$model->attributes=$_POST['Category'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -122,37 +126,65 @@ class NaturesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Natures');
+		$dataProvider=new CActiveDataProvider('Category');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Natures('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Natures']))
-			$model->attributes=$_GET['Natures'];
+  /**
+   * Manages all models.
+   */
+  public function actionTree()
+  {
+    //$this->pageTitle = Constants::$listModule['menu']['header'];
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+    $model=new Category('search');
+    $model->unsetAttributes();  // clear any default values
+    if(isset($_GET['Category']))
+      $model->attributes=$_GET['Category'];
+
+    $this->render('admin',array(
+      'model'=>$model,
+    ));
+  }
+
+  public function actionAdmin() {
+    $dataProvider = array(
+      array(
+        'text' => '<a class="btn btn-primary" href="create"><i class="icon-edit"></i>Thêm mới</a>',
+        'children' => Category::model()->findTreeMenu(),
+      ),
+    );
+    $this->render('admin',array(
+      'dataProvider'=>$dataProvider,
+    ));
+  }
+//	/**
+//	 * Manages all models.
+//	 */
+//	public function actionAdmin()
+//	{
+//		$model=new Category('search');
+//		$model->unsetAttributes();  // clear any default values
+//		if(isset($_GET['Category']))
+//			$model->attributes=$_GET['Category'];
+//
+//		$this->render('admin',array(
+//			'model'=>$model,
+//		));
+//	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Natures the loaded model
+	 * @return Category the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Natures::model()->findByPk($id);
+		$model=Category::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -160,11 +192,11 @@ class NaturesController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Natures $model the model to be validated
+	 * @param Category $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='natures-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='category-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

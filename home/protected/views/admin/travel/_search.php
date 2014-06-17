@@ -1,6 +1,6 @@
 <?php
-/* @var $this NaturesController */
-/* @var $model Natures */
+/* @var $this TravelController */
+/* @var $model Travel */
 /* @var $form CActiveForm */
 ?>
 

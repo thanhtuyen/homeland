@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "natures".
+ * This is the model class for table "people".
  *
- * The followings are the available columns in table 'natures':
+ * The followings are the available columns in table 'people':
  * @property integer $id
  * @property string $title
  * @property string $tieude
@@ -21,14 +21,14 @@
  * @property string $video
  * @property string $file
  */
-class Natures extends CActiveRecord
+class People extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'natures';
+		return 'people';
 	}
 
 	/**
@@ -128,7 +128,7 @@ class Natures extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Natures the static model class
+	 * @return People the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
