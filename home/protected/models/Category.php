@@ -170,16 +170,16 @@ class Category extends CActiveRecord
     }
     foreach ($categories as $category){
       if ($category['menu_type']==1) {
-        $url = "../news/admin";
+        $url = "../natures/admin";
       }
       if ($category['menu_type']==2) {
-        $url = "../detailmenu/admin";
+        $url = "../food/admin";
       }
       if ($category['menu_type']==3) {
-        $url = "../detailmenuimage/admin";
+        $url = "../travel/admin";
       }
       $tree[] = array(
-        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude'].'  ('.$category['name'].')'), array('update', 'id'=>$category['id'])).'</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="'.$url.'?menu_id='.$category['id'].'"><i class="icon-list-alt"></i>Nội dung</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-confirm delete" href="'.Yii::app()->createUrl("menu/delete",array("id"=>$category["id"])).'"><i class="icon-trash"></i>Xóa</a> ',
+        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude'].'  ('.$category['name'].')'), array('update', 'id'=>$category['id'])).'</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="'.$url.'?menu_id='.$category['id'].'"><i class="icon-list-alt"></i>Nội dung</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-confirm delete" href="'.Yii::app()->createUrl("category/delete",array("id"=>$category["id"])).'"><i class="icon-trash"></i>Xóa</a> ',
         'children' => self::findTreeMenu($category->attributes['id'], $category->attributes['menu_type'])
       );
     }

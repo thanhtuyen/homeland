@@ -28,7 +28,7 @@ class FoodController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','create','update', 'admin', 'delete'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -51,8 +51,9 @@ class FoodController extends Controller
 	 */
 	public function actionView($id)
 	{
+    $model = $this->loadModel($id);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
 		));
 	}
 
@@ -70,8 +71,17 @@ class FoodController extends Controller
 		if(isset($_POST['Food']))
 		{
 			$model->attributes=$_POST['Food'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+      $model->create_date = time();
+      $model->create_user =  1;
+      if ($model->validate()) {
+        $model->title=CHtml::encode($model->title);
+        $model->tieude= CHtml::encode($model->tieude);
+        $model->content=CHtml::encode($model->content);
+        $model->noidung=CHtml::encode($model->noidung);
+
+        if($model->save())
+          $this->redirect(array('view','id'=>$model->id));
+		  }
 		}
 
 		$this->render('create',array(
@@ -87,7 +97,10 @@ class FoodController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+    $model->setAttribute('title', CHtml::decode($model->title));
+    $model->setAttribute('tieude', CHtml::decode($model->tieude));
+    $model->setAttribute('content', CHtml::decode($model->content));
+    $model->setAttribute('noidung', CHtml::decode($model->noidung));
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

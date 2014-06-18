@@ -1,5 +1,6 @@
-<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/test.css"/>
+<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/booster/css/test.css"/>
 <?php
+
 /* @var $this CategoryController */
 /* @var $model Category */
 
@@ -8,10 +9,10 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-$this->menu=array(
-	array('label'=>'List Category', 'url'=>array('index')),
-	array('label'=>'Create Category', 'url'=>array('create')),
-);
+//$this->menu=array(
+//	array('label'=>'List Category', 'url'=>array('index')),
+//	array('label'=>'Create Category', 'url'=>array('create')),
+//);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -26,6 +27,7 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
+<div class="tree" style="width: 100%;">
 <?php
 
 $this->widget('CTreeView',array(
@@ -46,7 +48,7 @@ $this->widget('CTreeView',array(
 
 ?>
 
-
+</div>
 
 <!--<h1>Manage Categories</h1>-->
 <!---->
@@ -60,7 +62,7 @@ $this->widget('CTreeView',array(
 <?php //$this->renderPartial('_search',array(
 //	'model'=>$model,
 //)); ?>
-<!--</div><!-- search-form -->-->
+<!--</div><!-- search-form -->
 <!---->
 <?php //$this->widget('zii.widgets.grid.CGridView', array(
 //	'id'=>'category-grid',

@@ -22,10 +22,22 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
-		'title',
-		'tieude',
-		'content',
-		'noidung',
+    array('name' => 'title',
+      'type' => 'raw',
+      'value' => CHtml::decode($model->title)
+    ),
+    array('name' => 'content',
+      'type' => 'raw',
+      'value' => CHtml::decode($model->content)
+    ),
+    array('name' => 'tieude',
+      'type' => 'raw',
+      'value' => CHtml::decode($model->tieude)
+    ),
+    array('name' => 'noidung',
+      'type' => 'raw',
+      'value' => CHtml::decode($model->noidung)
+    ),
 		'is_public',
 		'category_id',
 		'del_flag',

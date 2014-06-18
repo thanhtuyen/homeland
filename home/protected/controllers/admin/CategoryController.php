@@ -28,20 +28,20 @@ class CategoryController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','create','update', 'admin', 'delete'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'admin'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
+//			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+//				'actions'=>array('create','update', 'admin'),
+//				'users'=>array('@'),
+//			),
+//			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+//				'actions'=>array('admin','delete'),
+//				'users'=>array('admin'),
+//			),
+//			array('deny',  // deny all users
+//				'users'=>array('*'),
+//			),
 		);
 	}
 
@@ -71,13 +71,15 @@ class CategoryController extends Controller
 		if(isset($_POST['Category']))
 		{
 			$model->attributes=$_POST['Category'];
-      $model->create_date = time();
-      $model->create_user =  1;
-     // echo $model->parent_id;die;
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
+      if ($model->validate()) {
+        $model->name = CHtml::decode($model->name);
+        $model->create_date = time();
+        $model->create_user =  1;
+       // echo $model->parent_id;die;
+        if($model->save())
+          $this->redirect(array('view','id'=>$model->id));
+      }
+    }
 		$this->render('create',array(
 			'model'=>$model,
 		));
