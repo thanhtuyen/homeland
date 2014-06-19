@@ -104,6 +104,7 @@ class Category extends CActiveRecord
 		$criteria->compare('updated_user',$this->updated_user);
 		$criteria->compare('create_date',$this->create_date);
 		$criteria->compare('updated_date',$this->updated_date);
+		$criteria->compare('category_id',$this->category_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -179,7 +180,7 @@ class Category extends CActiveRecord
         $url = "../travel/admin";
       }
       $tree[] = array(
-        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude'].'  ('.$category['name'].')'), array('update', 'id'=>$category['id'])).'</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="'.$url.'?menu_id='.$category['id'].'"><i class="icon-list-alt"></i>Nội dung</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-confirm delete" href="'.Yii::app()->createUrl("category/delete",array("id"=>$category["id"])).'"><i class="icon-trash"></i>Xóa</a> ',
+        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude'].'  ('.$category['name'].')'), array('update', 'id'=>$category['id'])).'</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="'.$url.'?category_id='.$category['id'].'"><i class="icon-list-alt"></i>Nội dung</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-confirm delete" href="'.Yii::app()->createUrl("category/delete",array("id"=>$category["id"])).'"><i class="icon-trash"></i>Xóa</a> ',
         'children' => self::findTreeMenu($category->attributes['id'], $category->attributes['menu_type'])
       );
     }

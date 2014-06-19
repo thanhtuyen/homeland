@@ -12,6 +12,7 @@
     width: 100%!important;
   }
 </style>
+
 <div class="form">
   <?php
   $form = $this->beginWidget(
@@ -25,6 +26,34 @@
   );
   echo $form->errorSummary($model);
   echo '<p class="note">Fields with <span class="required">*</span> are required.</p>';
+
+
+  if($model->isNewRecord){
+    $menu_detail = Category::model()->findByPk($category_id);
+    $parents[$category_id] = $menu_detail->name;
+//    print_r($parents[$category_id] );die;
+    echo $form->dropDownListGroup(
+      $model,
+      'category_id',
+      array(
+        'wrapperHtmlOptions' => array(
+          'class' => 'col-sm-5',
+        ),
+        'widgetOptions' => array(
+          'data' => $parents,
+          'htmlOptions' => array('disabled'=> true),
+        )
+      )
+    );
+    echo '<input type="hidden" name="category_id" value="'.$category_id.'">';
+    //echo $form->dropDownList($model,'menu_id',$parents ,array( 'prompt'=>'Chọn menu ...'));
+  } else {
+    //$parents = Detailmenu::getListMenu($model->menu_id);
+    $menu_detail = Category::model()->findByPk($model->category_id);
+    $parents[$menu_id] = $menu_detail->name;
+    echo $form->dropDownListGroup($model,'category_id',$parents ,array('disabled'=> true));
+  }
+
   echo $form->textFieldGroup( $model,'title',  array('wrapperHtmlOptions' => array( 'class' => 'textfield', )  ) );
   echo $form->ckEditorGroup( $model,'content',  array('wrapperHtmlOptions' => array( ),
                                                 'widgetOptions' => array(
@@ -45,9 +74,68 @@
         /* 'resize_minWidth' => '320'*/
       )
     )) );
-  echo $form->fileFieldGroup( $model,'image',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
-  echo $form->fileFieldGroup( $model,'file',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
-  echo $form->fileFieldGroup( $model,'video',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
+  echo '<div class="form-group">';
+    echo'<label class="col-sm-3 control-label" for="Food_image">Image</label>';
+     echo '<div class="col-sm-9">';
+      $this->widget('CMultiFileUpload', array(
+      'model' => $model,
+      'attribute' => 'image',
+      'max' => 6
+      ));
+    echo'</div>';
+  echo'</div>';
+
+  echo '<div class="form-group">';
+    echo'<label class="col-sm-3 control-label" for="Food_image">File</label>';
+    echo '<div class="col-sm-9">';
+    $this->widget('CMultiFileUpload', array(
+      'model' => $model,
+      'attribute' => 'file',
+      'max' => 6
+    ));
+    echo'</div>';
+  echo'</div>';
+
+  echo '<div class="form-group">';
+    echo'<label class="col-sm-3 control-label" for="Food_image">Video</label>';
+    echo '<div class="col-sm-9">';
+    $this->widget('CMultiFileUpload', array(
+      'model' => $model,
+      'attribute' => 'video',
+      'max' => 6
+    ));
+    echo'</div>';
+  echo'</div>';
+
+  echo $form->radioButtonListGroup(
+    $model,
+    'is_public',
+    array(
+      'widgetOptions' => array(
+        'data' => array(
+          'Công khai',
+          'Không công khai',
+        )
+      )
+    )
+  );
+
+  echo $form->radioButtonListGroup(
+    $model,
+    'feature_flag',
+    array(
+      'widgetOptions' => array(
+        'data' => array(
+          'Không đặt ở trang chủ',
+          'Trung tâm',
+          'Bên trái',
+        )
+      )
+    )
+  );
+  //  echo $form->fileFieldGroup( $model,'image',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
+//  echo $form->fileFieldGroup( $model,'file',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
+//  echo $form->fileFieldGroup( $model,'video',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
 
 //  echo $form->fileFieldGroup($model, 'fileField',
 //    array(

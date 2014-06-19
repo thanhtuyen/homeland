@@ -15,4 +15,4 @@ $this->breadcrumbs=array(
 
 <h1>Create Food</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'category_id'=>$category_id)); ?>

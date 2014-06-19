@@ -64,10 +64,13 @@ class FoodController extends Controller
 	public function actionCreate()
 	{
 		$model=new Food;
-
+    if(!isset($_GET['category_id']))
+      $this->redirect(Yii::app()->homeUrl);
+    else
+      $category_id = $_GET['category_id'];
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+    $model->setAttribute('is_public', 0);
 		if(isset($_POST['Food']))
 		{
 			$model->attributes=$_POST['Food'];
@@ -85,7 +88,7 @@ class FoodController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model,'category_id'=>$category_id
 		));
 	}
 
@@ -146,13 +149,19 @@ class FoodController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Food('search');
+
+    if(!isset($_GET['category_id']))
+      $this->redirect(Yii::app()->homeUrl);
+    else
+      $category_id = $_GET['category_id'];
+    $model=new Food('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Food']))
 			$model->attributes=$_GET['Food'];
+      $model->category_id = $category_id;
 
 		$this->render('admin',array(
-			'model'=>$model,
+			'model'=>$model,'category_id'=>$category_id
 		));
 	}
 

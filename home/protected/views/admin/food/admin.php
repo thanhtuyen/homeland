@@ -39,7 +39,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-
+<div style="text-align:right">
+  <?php
+  //$detail_menu_record = Detailmenu::model()->getDetailMenu($menu_id);
+  //if(count($detail_menu_record) == 0)
+  echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl.'/images/icon/bplus.png',"bCreate",array("class"=>"icon_plus", 'title'=>'Thêm mới Chi Tiết Food')), Yii::app()->createUrl('/food/create?category_id='.$category_id)) ;
+  ?>
+</div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'food-grid',
 	'dataProvider'=>$model->search(),
