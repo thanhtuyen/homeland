@@ -74,3 +74,13 @@
   border:1px solid #94a0b4;
   color:#000
 }
+.icon_plus, .icon_edit {
+  height:40px;
+  width:40px;
+}
+.grid-view table.items {
+  background:white;
+  border:1px solid #D0E3EF;
+  border-collapse:collapse;
+  width:100%;
+}

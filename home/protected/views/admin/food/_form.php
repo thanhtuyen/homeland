@@ -95,17 +95,17 @@
     ));
     echo'</div>';
   echo'</div>';
-
-  echo '<div class="form-group">';
-    echo'<label class="col-sm-3 control-label" for="Food_image">Video</label>';
-    echo '<div class="col-sm-9">';
-    $this->widget('CMultiFileUpload', array(
-      'model' => $model,
-      'attribute' => 'video',
-      'max' => 6
-    ));
-    echo'</div>';
-  echo'</div>';
+  echo $form->fileFieldGroup( $model,'video',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
+//  echo '<div class="form-group">';
+//    echo'<label class="col-sm-3 control-label" for="Food_image">Video</label>';
+//    echo '<div class="col-sm-9">';
+//    $this->widget('CMultiFileUpload', array(
+//      'model' => $model,
+//      'attribute' => 'video',
+//      'max' => 6
+//    ));
+//    echo'</div>';
+//  echo'</div>';
 
   echo $form->radioButtonListGroup(
     $model,

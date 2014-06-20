@@ -41,7 +41,18 @@ class Food extends CActiveRecord
 		return array(
 			array('title, tieude, content, noidung, create_user, create_date', 'required'),
 			array('is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date', 'numerical', 'integerOnly'=>true),
-			array('image, video, file', 'length', 'max'=>256),
+//			array('image, video, file', 'length', 'max'=>256),
+//      array('image','file',
+//        //'types'=>'jpg, jpeg, png, gif',
+//        'mimeTypes'=>array('image/gif', 'image/jpeg', 'image/jpg', 'image/png'),
+//        'maxSize'=>1024*1024*2, // 2MB
+//        'wrongMimeType'=>getMessage('wrongTypeImage'),
+//        'tooLarge'=>getMessage('tooLarge','',array('number'=>2)),
+//        'message'=>getMessage('required', $this->getAttributeLabel('image')),
+//        'allowEmpty' => false,
+//        'on'=> 'create',
+//      ),
+      array('image', 'file', 'types'=>'jpg, gif, png'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, tieude, content, noidung, is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date, image, video, file', 'safe', 'on'=>'search'),
