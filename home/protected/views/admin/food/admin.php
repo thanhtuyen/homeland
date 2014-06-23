@@ -40,17 +40,21 @@ $('.search-form form').submit(function(){
 <div style="text-align:right">
   <?php
   //$detail_menu_record = Detailmenu::model()->getDetailMenu($menu_id);
-  //if(count($detail_menu_record) == 0)
-  echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl.'/images/icon/bplus.png',"bCreate",array("class"=>"icon_plus", 'title'=>'Thêm mới Chi Tiết Food')), Yii::app()->createUrl('/food/create?category_id='.$category_id)) ;
+  if($category_id){
+    echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl.'/images/icon/bplus.png',"bCreate",array("class"=>"icon_plus", 'title'=>'Thêm mới Chi Tiết Food')), Yii::app()->createUrl('/food/create?category_id='.$category_id)) ;
+  } else {
+    echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl.'/images/icon/bplus.png',"bCreate",array("class"=>"icon_plus", 'title'=>'Thêm mới Chi Tiết Food')), Yii::app()->createUrl('/food/create')) ;
+  }
+
   ?>
 </div>
 <?php
 $gridColumns = array(
   array('name'=>'id', 'header'=>'#', 'htmlOptions'=>array('style'=>'width: 60px')),
   array('name'=>'title', 'header'=>'title'),
-  array('name'=>'tieude', 'header'=>'tieude'),
-  array('name'=>'create_user', 'header'=>'create_user'),
-  array('name'=>'create_date', 'header'=>'create_date'),
+  array('name'=>'tieude', 'header'=>'Tiêu đề'),
+  array('name'=>'create_user', 'header'=>'Người tạo'),
+  array('name'=>'create_date', 'header'=>'Ngày tạo'),
   array(
     'htmlOptions' => array('nowrap'=>'nowrap'),
     'class'=>'booster.widgets.TbButtonColumn',

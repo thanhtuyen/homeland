@@ -14,7 +14,7 @@
  */
  function getMessage ($messageKey, $title = "", $arrParam=array()) {
 	if (!empty($messageKey)) {
-		$message = Constants::$listMessage[$messageKey];
+		$message = getTextMessage($messageKey);
 		$message = str_replace("###TITLE###", $title, $message);
 		$arrParam = is_array($arrParam) ? $arrParam :  array();
 		foreach ($arrParam as $k => $v) {
@@ -194,4 +194,18 @@ function vn_str_filter ($str){
     $str = preg_replace("/($uni)/i", $nonUnicode, $str);
   }
   return $str;
+}
+function getTextMessage($message){
+  $listMessage = array(
+    'no_data' 			=> '###TITLE### không có dữ liệu',
+    'max_length' 		=> '###TITLE### cho phép nhập tối đa ###NUMBER### ký tự',
+    'required'			=> '###TITLE### không được phép rỗng',
+    'unique'			=> '###TITLE### không được phép trùng',
+    'numerical'			=> 'Nhập ký tự số',
+    'wrongTypeImage'	=> 'Tải hình ảnh với định dạng jpg, gif, png',
+    'wrongTypeFile'		=> 'Tải tập tin với định dạng doc, pdf, docx, xls',
+    'tooLarge'			=> 'Tải tập tin không quá ###NUMBER###MB',
+    'DuplicateMenu' 	=> 'Chỉ cho phép menu ###TITLE### có loại là menu đơn ,độ ưu tiên bằng ###NUMBER### và menu cha là Root.'
+  );
+  return $listMessage[$message];
 }

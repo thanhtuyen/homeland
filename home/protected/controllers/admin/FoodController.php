@@ -64,6 +64,7 @@ class FoodController extends Controller
 	public function actionCreate()
 	{
 		$model=new Food;
+//    print_r($_GET);die;
     if(!isset($_GET['category_id']))
       $this->redirect(Yii::app()->homeUrl);
     else
@@ -77,12 +78,52 @@ class FoodController extends Controller
       $model->create_date = time();
       $model->create_user =  1;
       if ($model->validate()) {
+        //save list image
+        $ifile_paths = array();
+        $ifile = CUploadedFile::getInstances($model, 'image');
+        if($ifile){
+          foreach($ifile as $i=>$image_path) {
+            $formatName = $image_path;
+            $ifile_paths[$i] = $formatName;
+          }
+          $model->image = implode(',', $ifile_paths);
+        }
+        //save list file
+        $ffile_paths = array();
+        $ffile=CUploadedFile::getInstances($model, 'file');
+        if($ffile){
+          foreach ($ffile as $i=>$file){
+            $formatName=$file;
+            $ffile_paths[$i]=$formatName;
+          }
+          $model->fileh = implode(',', $ffile);
+        }
+
+        //save video
+        $vfile_paths = CUploadedFile::getInstance($model,'video');
+        if (is_object($vfile_paths) && get_class($vfile_paths)==='CUploadedFile')
+        {
+          $model->video = $vfile_paths;
+        }
+
         $model->title=CHtml::encode($model->title);
         $model->tieude= CHtml::encode($model->tieude);
         $model->content=CHtml::encode($model->content);
         $model->noidung=CHtml::encode($model->noidung);
 
-        if($model->save())
+        if($model->save(true,array('title','tieude','content','noidung','image','file','video','create_date','create_user','del_flag','feature_flg', 'is_public')))
+          if($ifile_paths){
+            uploadMultifile($model, 'image', Food::image_url);
+          }
+          if($ffile_paths){
+            uploadMultifile($model, 'file', Food::file_url);
+          }
+
+          if($vfile_paths) {
+            $model->video->saveAs(Yii::getPathOfAlias('webroot').Food::video_url . $model->video->name);
+            $model->save(false);
+          }
+
           $this->redirect(array('view','id'=>$model->id));
 		  }
 		}
@@ -151,8 +192,10 @@ class FoodController extends Controller
 	{
 
     if(!isset($_GET['category_id']))
-      $this->redirect(Yii::app()->homeUrl);
+//      $this->redirect(Yii::app()->homeUrl);
+    $category_id = "";
     else
+
       $category_id = $_GET['category_id'];
     $model=new Food('search');
 		$model->unsetAttributes();  // clear any default values

@@ -133,13 +133,19 @@ class NaturesController extends Controller
 	 */
 	public function actionAdmin()
 	{
+    if(!isset($_GET['category_id']))
+//      $this->redirect(Yii::app()->homeUrl);
+    $category_id = "";
+  else
+
+    $category_id = $_GET['category_id'];
 		$model=new Natures('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Natures']))
 			$model->attributes=$_GET['Natures'];
 
 		$this->render('admin',array(
-			'model'=>$model,
+			'model'=>$model,'category_id'=>$category_id
 		));
 	}
 

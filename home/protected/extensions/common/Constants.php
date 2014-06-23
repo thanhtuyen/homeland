@@ -1,5 +1,5 @@
 <?php
-define('ROOT_PATH', str_replace('/protected', '', Yii::app()->basePath));
+define('ROOT_PATH', str_replace('/../protected', '', Yii::app()->basePath));
 
 
 class Constants {

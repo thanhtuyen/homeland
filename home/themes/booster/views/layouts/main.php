@@ -58,8 +58,8 @@
                   array('label' => 'Quản lý', 'url' => '/admin.php/category/admin')
                 )
               ),
-              array('label' => 'Thiên nhiên', 'url' => '/admin.php/natures/index'),
-              array('label' => 'Food', 'url' => '/admin.php/food/index'),
+              array('label' => 'Thiên nhiên', 'url' => '/admin.php/natures/admin'),
+              array('label' => 'Food', 'url' => '/admin.php/food/admin'),
 
 //              array(
 //                'label' => 'Thiên nhiên',
