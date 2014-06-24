@@ -17,17 +17,34 @@
     margin: 0 auto;
   }
   #gallery ul{
-    padding-left: 20%;
-    text-align: center;
+    padding-left: 30%;
+    /*text-align: center;*/
 
   }
 
   #gallery li {
     display: inline;
-    margin-right: 3px;
+    margin-right: 5px;
+    padding-top: 3px;
+
+  }
+  #gallery_file{
+    width: 100%!important;
+    margin: 0 auto;
+  }
+  #gallery_file ul{
+    padding-left: 30%;
+    /*text-align: center;*/
+
+  }
+  #gallery_file li {
+    display: inline;
+    margin-right: 5px;
+    padding-top: 3px;
+
   }
 </style>
-
+<input type="hidden"id="food_id" value="<?php echo  $model->id;?>">
 <div class="form">
   <?php
   $form = $this->beginWidget(
@@ -100,26 +117,11 @@
       ));
     echo'</div>';
   echo'</div>';
+  if($model->image) {
+    echo '<div id="gallery">
 
-  echo '
-
-      <div id="gallery">
-        <ul>
-          <li><img src="/images/essential-oils.jpg" alt="" /><input style=" position:absolute;  margin-left:-25px; padding-top:-15px; z-index:1; background-color: #ff0000"
-          type="button" value="x" name="qqq" onclick="delete_image_name(this)">
-          </li>
-          <li><img src="/images/essential-oils.jpg" alt="" /><input style=" position:absolute;  margin-left:-25px; padding-top:-15px; z-index:1;background-color: #ff0000"
-          type="button" value="x" name="qqq" onclick="delete_image_name(this)">
-          </li>
-          <li><img src="/images/essential-oils.jpg" alt="" /><input style=" position:absolute;  margin-left:-25px; padding-top:-15px; z-index:1;background-color: #ff0000"
-          type="button" value="x" name="qqq" onclick="delete_image_name(this)"></li>
-          <li><img src="/images/essential-oils.jpg" alt="" /><input style=" position:absolute;  margin-left:-25px; padding-top:-15px; z-index:1;background-color: #ff0000"
-          type="button" value="x" name="qqq" onclick="delete_image_name(this)"></li>
-        </ul>
-      </div>
-
-  ';
-
+      </div>';
+  }
   echo '<div class="form-group">';
     echo'<label class="col-sm-3 control-label" for="Food_image">File</label>';
     echo '<div class="col-sm-9">';
@@ -130,6 +132,16 @@
     ));
     echo'</div>';
   echo'</div>';
+//  if($model->file){
+    echo '<div id="gallery_file">
+        <ul>
+        <li><input type="checkbox" name="delete_file"/>CHtml::link($model->file,</li>
+        <li><input type="checkbox" name="delete_file"/>CHtml::link($model->file,</li>
+        <li><input type="checkbox" name="delete_file"/>CHtml::link($model->file,</li>
+      </ul>
+      </div>';
+//  }
+
   echo $form->fileFieldGroup( $model,'video',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
 
   echo $form->radioButtonListGroup(
@@ -184,22 +196,62 @@
 
 </div>
 <script>
+  var id = $('#food_id').val();
+  $.ajax( {
+    type: 'GET',
+    url: '../../food/delete_image',
+    data: "id="+id,
+
+    success: function(data) {
+      $('#gallery').html(data);
+    }
+  } );
+
   function delete_image_name(elm){
     var result = confirm("Bạn thật sự muốn xóa hình  này?");
     if (result==true) {
-      alert(elm.name);
-//      $.ajax( {
-//        type: 'GET',
-//        url: '../../news/delete_image',
-//        data: "id="+id+"&image_name="+elm.value,
-//
-//        success: function(data) {
-//          $('#message').html(data);
-//          $( "#show_image" ).load( "/admin.php/news/delete_image?id="+id, function() {
-//
-//          });
-//        }
-//      } );
+      $.ajax( {
+        type: 'GET',
+        url: '../../food/delete_image',
+        data: "id="+id+"&image_name="+elm.name,
+
+        success: function(data) {
+          $( "#gallery" ).load( "/admin.php/food/delete_image?id="+id, function() {
+
+          });
+
+        }
+      } );
+    }
+  }
+  $.ajax( {
+    type: 'GET',
+    url: '../../food/delete_file',
+    data: "id="+id,
+
+    success: function(data) {
+      $('#gallery_file').html(data);
+    }
+  } );
+
+  function delete_file_name(elm){
+    var result = confirm("Bạn thật sự muốn xóa hình  này?");
+    if (result==true) {
+      $.ajax( {
+        type: 'GET',
+        url: '../../food/delete_file',
+        data: "id="+id+"&file_name="+elm.name,
+
+        success: function(data) {
+          $( "#gallery_file" ).load( "/admin.php/food/delete_file?id="+id, function() {
+
+          });
+
+        }
+      } );
+    } else {
+      elm.checked = false;
+
     }
   }
 </script>
