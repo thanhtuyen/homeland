@@ -134,16 +134,26 @@
   echo'</div>';
 //  if($model->file){
     echo '<div id="gallery_file">
-        <ul>
-        <li><input type="checkbox" name="delete_file"/>CHtml::link($model->file,</li>
-        <li><input type="checkbox" name="delete_file"/>CHtml::link($model->file,</li>
-        <li><input type="checkbox" name="delete_file"/>CHtml::link($model->file,</li>
-      </ul>
+
       </div>';
 //  }
 
   echo $form->fileFieldGroup( $model,'video',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
+  $video = Yii::app()->request->baseUrl.Food::video_url.''.$model->video;
+  if($model->video){?>
+ <div class="form-group">
+   <label class="col-sm-3 control-label" for="Food_image"></label>
+   <div class="col-sm-9">
+     <video width="225" height="200" id="player2" controls="controls">
+       <source width="225" height="180" src="<?php echo $video;?>" type="video/mp4">
+     </video>
+   </div>
 
+  </div>
+  <?php
+  }
+  ?>
+  <?php
   echo $form->radioButtonListGroup(
     $model,
     'is_public',

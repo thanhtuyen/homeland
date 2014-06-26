@@ -54,7 +54,9 @@ $gridColumns = array(
   array('name'=>'title', 'header'=>'title'),
   array('name'=>'tieude', 'header'=>'Tiêu đề'),
   array('name'=>'create_user', 'header'=>'Người tạo'),
-  array('name'=>'create_date', 'header'=>'Ngày tạo'),
+  array('name'=>'create_date',
+      'value'=> 'date("d-m-Y","$data->create_date")',
+    'header'=>'Ngày tạo'),
   array(
     'htmlOptions' => array('nowrap'=>'nowrap'),
     'class'=>'booster.widgets.TbButtonColumn',
@@ -68,7 +70,8 @@ $this->widget(
   array(
     'id'=>'food-grid',
     'dataProvider' => $model->search(),
-    'template' => "{items}",
+    'template' => "{items}{pager}",
+    'enablePagination' => true,
     'columns' => $gridColumns,
   )
 );
