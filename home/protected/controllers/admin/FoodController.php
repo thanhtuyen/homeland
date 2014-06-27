@@ -52,6 +52,10 @@ class FoodController extends Controller
 	public function actionView($id)
 	{
     $model = $this->loadModel($id);
+    $model->setAttribute('title', CHtml::decode($model->title));
+    $model->setAttribute('tieude', CHtml::decode($model->tieude));
+    $model->setAttribute('content', CHtml::decode($model->content));
+    $model->setAttribute('noidung', CHtml::decode($model->noidung));
 		$this->render('view',array(
 			'model'=>$model,
 		));

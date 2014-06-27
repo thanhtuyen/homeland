@@ -6,10 +6,10 @@ $this->breadcrumbs=array(
 	'Natures',
 );
 
-$this->menu=array(
-	array('label'=>'Create Natures', 'url'=>array('create')),
-	array('label'=>'Manage Natures', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'Create Food', 'url'=>array('create')),
+//	array('label'=>'Manage Food', 'url'=>array('admin')),
+//);
 ?>
 
 <h1>Natures</h1>

@@ -23,6 +23,9 @@
  */
 class Natures extends CActiveRecord
 {
+  const image_url = '/uploadfile/natures/images/';
+  const file_url = '/uploadfile/natures/file/';
+  const video_url = '/uploadfile/natures/video/';
 	/**
 	 * @return string the associated database table name
 	 */
@@ -41,8 +44,29 @@ class Natures extends CActiveRecord
 		return array(
 			array('title, tieude, content, noidung, create_user, create_date', 'required'),
 			array('is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date', 'numerical', 'integerOnly'=>true),
-			array('image, video, file', 'length', 'max'=>256),
+//			array('image, video, file', 'length', 'max'=>256),
 			// The following rule is used by search().
+      array('image','file',
+        //'types'=>'jpg, jpeg, png, gif',
+        'mimeTypes'=>array('image/gif', 'image/jpeg', 'image/jpg', 'image/png'),
+        'maxSize'=>1024*1024*2, // 2MB
+        'wrongMimeType'=>getMessage('wrongTypeImage'),
+        'tooLarge'=>getMessage('tooLarge','',array('number'=>2)),
+        'message'=>getMessage('required', $this->getAttributeLabel('image')),
+        'allowEmpty' => false,
+        'on'=> 'create',
+      ),
+      array('file', 'file',
+        //'types'=>'doc, pdf, docx',
+        'mimeTypes'=>array('application/pdf','application/xls', 'application/msword', 'text/plain', 'application/vnd.ms-excel', 'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet'),
+        'maxSize'=>1024*1024*10,
+        'wrongMimeType'=>getMessage('wrongTypeFile'),
+        'tooLarge'=>getMessage('tooLarge','',array('number'=>10)),
+        'maxFiles' => 5,
+        'allowEmpty'=>true ),
+      array('video', 'file', 'types' => 'flv,mov,mp4, mp3',
+//        'maxSize'=>1024*1024*10,
+        'allowEmpty'=>true),
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, tieude, content, noidung, is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date, image, video, file', 'safe', 'on'=>'search'),
 		);

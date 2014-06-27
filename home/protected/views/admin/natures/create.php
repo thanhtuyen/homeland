@@ -7,12 +7,12 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-	array('label'=>'List Natures', 'url'=>array('index')),
-	array('label'=>'Manage Natures', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'List Food', 'url'=>array('index')),
+//	array('label'=>'Manage Food', 'url'=>array('admin')),
+//);
 ?>
 
 <h1>Create Natures</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'category_id'=>$category_id)); ?>

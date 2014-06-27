@@ -64,7 +64,7 @@ class Food extends CActiveRecord
         'maxFiles' => 5,
         'allowEmpty'=>true ),
       array('video', 'file', 'types' => 'flv,mov,mp4, mp3',
-        'maxSize'=>1024*1024*10,
+//        'maxSize'=>1024*1024*10,
         'allowEmpty'=>true),
 
 			// The following rule is used by search().

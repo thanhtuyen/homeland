@@ -8,12 +8,12 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Natures', 'url'=>array('index')),
-	array('label'=>'Create Natures', 'url'=>array('create')),
-	array('label'=>'View Natures', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Natures', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'List Food', 'url'=>array('index')),
+//	array('label'=>'Create Food', 'url'=>array('create')),
+//	array('label'=>'View Food', 'url'=>array('view', 'id'=>$model->id)),
+//	array('label'=>'Manage Food', 'url'=>array('admin')),
+//);
 ?>
 
 <h1>Update Natures <?php echo $model->id; ?></h1>

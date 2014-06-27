@@ -84,7 +84,17 @@
     //$parents = Detailmenu::getListMenu($model->menu_id);
     $menu_detail = Category::model()->findByPk($model->category_id);
     $parents[$menu_id] = $menu_detail->name;
-    echo $form->dropDownListGroup($model,'category_id',$parents ,array('disabled'=> true));
+    echo $form->dropDownListGroup($model,'category_id',
+      array(
+        'wrapperHtmlOptions' => array(
+          'class' => 'col-sm-5',
+        ),
+        'widgetOptions' => array(
+          'data' => $parents,
+          'htmlOptions' => array('disabled'=> true),
+        )
+      )
+     );
   }
 
   echo $form->textFieldGroup( $model,'title',  array('wrapperHtmlOptions' => array( 'class' => 'textfield', )  ) );
