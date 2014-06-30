@@ -60,21 +60,13 @@
               ),
               array('label' => 'Thiên nhiên', 'url' => '/admin.php/natures/admin'),
               array('label' => 'Food', 'url' => '/admin.php/food/admin'),
+              array('label' => 'Culture', 'url' => '/admin.php/culture/admin'),
+              array('label' => 'Economy', 'url' => '/admin.php/economy/admin'),
+              array('label' => 'Historical', 'url' => '/admin.php/historical/admin'),
+              array('label' => 'Specialties', 'url' => '/admin.php/specialties/admin'),
+              array('label' => 'People', 'url' => '/admin.php/people/admin'),
+              array('label' => 'Travel', 'url' => '/admin.php/travel/admin'),
 
-//              array(
-//                'label' => 'Thiên nhiên',
-//                'items' => array(
-//                  array('label' => 'Tạo mới', 'url' => '/admin.php/natures/create'),
-//                  array('label' => 'Quản lý', 'url' => '/admin.php/natures/admin')
-//                )
-//              ),
-//              array(
-//                'label' => 'Food',
-//                'items' => array(
-//                  array('label' => 'Tạo mới', 'url' => '/admin.php/food/create'),
-//                  array('label' => 'Quản lý', 'url' => '/admin.php/food/admin')
-//                )
-//              ),
             )
           )
         )

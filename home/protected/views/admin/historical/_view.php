@@ -1,6 +1,6 @@
 <?php
-/* @var $this HistoricalController */
-/* @var $data Historical */
+/* @var $this FoodController */
+/* @var $data Food */
 ?>
 
 <div class="view">

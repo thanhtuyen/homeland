@@ -23,115 +23,140 @@
  */
 class Economy extends CActiveRecord
 {
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'economy';
-	}
+  const image_url = '/uploadfile/economy/images/';
+  const file_url = '/uploadfile/economy/file/';
+  const video_url = '/uploadfile/economy/video/';
+  /**
+   * @return string the associated database table name
+   */
+  public function tableName()
+  {
+    return 'economy';
+  }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('title, tieude, content, noidung, create_user, create_date', 'required'),
-			array('is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date', 'numerical', 'integerOnly'=>true),
-			array('image, video, file', 'length', 'max'=>256),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, title, tieude, content, noidung, is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date, image, video, file', 'safe', 'on'=>'search'),
-		);
-	}
+  /**
+   * @return array validation rules for model attributes.
+   */
+  public function rules()
+  {
+    // NOTE: you should only define rules for those attributes that
+    // will receive user inputs.
+    return array(
+      array('title, tieude, content, noidung, create_user, create_date', 'required'),
+      array('is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date', 'numerical', 'integerOnly'=>true),
+//			array('image, video, file', 'length', 'max'=>256),
+      array('image','file',
+        //'types'=>'jpg, jpeg, png, gif',
+        'mimeTypes'=>array('image/gif', 'image/jpeg', 'image/jpg', 'image/png'),
+        'maxSize'=>1024*1024*2, // 2MB
+        'wrongMimeType'=>getMessage('wrongTypeImage'),
+        'tooLarge'=>getMessage('tooLarge','',array('number'=>2)),
+        'message'=>getMessage('required', $this->getAttributeLabel('image')),
+        'allowEmpty' => false,
+        'on'=> 'create',
+      ),
+      array('file', 'file',
+        //'types'=>'doc, pdf, docx',
+        'mimeTypes'=>array('application/pdf','application/xls', 'application/msword', 'text/plain', 'application/vnd.ms-excel', 'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet'),
+        'maxSize'=>1024*1024*10,
+        'wrongMimeType'=>getMessage('wrongTypeFile'),
+        'tooLarge'=>getMessage('tooLarge','',array('number'=>10)),
+        'maxFiles' => 5,
+        'allowEmpty'=>true ),
+      array('video', 'file', 'types' => 'flv,mov,mp4, mp3',
+//        'maxSize'=>1024*1024*10,
+        'allowEmpty'=>true),
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		);
-	}
+      // The following rule is used by search().
+      // @todo Please remove those attributes that should not be searched.
+      array('id, title, tieude, content, noidung, is_public, category_id, del_flag, feature_flag, create_user, updated_user, create_date, updated_date, image, video, file', 'safe', 'on'=>'search'),
+    );
+  }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'title' => 'Title',
-			'tieude' => 'Tieude',
-			'content' => 'Content',
-			'noidung' => 'Noidung',
-			'is_public' => 'Is Public',
-			'category_id' => 'Category',
-			'del_flag' => 'Del Flag',
-			'feature_flag' => 'Feature Flag',
-			'create_user' => 'Create User',
-			'updated_user' => 'Updated User',
-			'create_date' => 'Create Date',
-			'updated_date' => 'Updated Date',
-			'image' => 'Image',
-			'video' => 'Video',
-			'file' => 'File',
-		);
-	}
+  /**
+   * @return array relational rules.
+   */
+  public function relations()
+  {
+    // NOTE: you may need to adjust the relation name and the related
+    // class name for the relations automatically generated below.
+    return array(
+    );
+  }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+  /**
+   * @return array customized attribute labels (name=>label)
+   */
+  public function attributeLabels()
+  {
+    return array(
+      'id' => 'ID',
+      'title' => 'Title',
+      'tieude' => 'Tieude',
+      'content' => 'Content',
+      'noidung' => 'Noidung',
+      'is_public' => 'Is Public',
+      'category_id' => 'Category',
+      'del_flag' => 'Del Flag',
+      'feature_flag' => 'Feature Flag',
+      'create_user' => 'Create User',
+      'updated_user' => 'Updated User',
+      'create_date' => 'Create Date',
+      'updated_date' => 'Updated Date',
+      'image' => 'Image',
+      'video' => 'Video',
+      'file' => 'File',
+    );
+  }
 
-		$criteria=new CDbCriteria;
+  /**
+   * Retrieves a list of models based on the current search/filter conditions.
+   *
+   * Typical usecase:
+   * - Initialize the model fields with values from filter form.
+   * - Execute this method to get CActiveDataProvider instance which will filter
+   * models according to data in model fields.
+   * - Pass data provider to CGridView, CListView or any similar widget.
+   *
+   * @return CActiveDataProvider the data provider that can return the models
+   * based on the search/filter conditions.
+   */
+  public function search()
+  {
+    // @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('tieude',$this->tieude,true);
-		$criteria->compare('content',$this->content,true);
-		$criteria->compare('noidung',$this->noidung,true);
-		$criteria->compare('is_public',$this->is_public);
-		$criteria->compare('category_id',$this->category_id);
-		$criteria->compare('del_flag',$this->del_flag);
-		$criteria->compare('feature_flag',$this->feature_flag);
-		$criteria->compare('create_user',$this->create_user);
-		$criteria->compare('updated_user',$this->updated_user);
-		$criteria->compare('create_date',$this->create_date);
-		$criteria->compare('updated_date',$this->updated_date);
-		$criteria->compare('image',$this->image,true);
-		$criteria->compare('video',$this->video,true);
-		$criteria->compare('file',$this->file,true);
+    $criteria=new CDbCriteria;
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
+    $criteria->compare('id',$this->id);
+    $criteria->compare('title',$this->title,true);
+    $criteria->compare('tieude',$this->tieude,true);
+    $criteria->compare('content',$this->content,true);
+    $criteria->compare('noidung',$this->noidung,true);
+    $criteria->compare('is_public',$this->is_public);
+    $criteria->compare('category_id',$this->category_id);
+    $criteria->compare('del_flag',$this->del_flag);
+    $criteria->compare('feature_flag',$this->feature_flag);
+    $criteria->compare('create_user',$this->create_user);
+    $criteria->compare('updated_user',$this->updated_user);
+    $criteria->compare('create_date',$this->create_date);
+    $criteria->compare('updated_date',$this->updated_date);
+    $criteria->compare('image',$this->image,true);
+    $criteria->compare('video',$this->video,true);
+    $criteria->compare('file',$this->file,true);
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Economy the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+    return new CActiveDataProvider($this, array(
+      'criteria'=>$criteria,
+    ));
+  }
+
+  /**
+   * Returns the static model of the specified AR class.
+   * Please note that you should have this exact method in all your CActiveRecord descendants!
+   * @param string $className active record class name.
+   * @return economy the static model class
+   */
+  public static function model($className=__CLASS__)
+  {
+    return parent::model($className);
+  }
 }

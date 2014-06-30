@@ -1,18 +1,18 @@
 <?php
-/* @var $this CultureController */
+/* @var $this FoodController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Cultures',
+	'Foods',
 );
 
 $this->menu=array(
-	array('label'=>'Create Culture', 'url'=>array('create')),
-	array('label'=>'Manage Culture', 'url'=>array('admin')),
+	array('label'=>'Create Food', 'url'=>array('create')),
+	array('label'=>'Manage Food', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Cultures</h1>
+<h1>Foods</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

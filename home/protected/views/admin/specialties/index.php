@@ -1,18 +1,18 @@
 <?php
-/* @var $this SpecialtiesController */
+/* @var $this FoodController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Specialties',
+	'Foods',
 );
 
 $this->menu=array(
-	array('label'=>'Create Specialties', 'url'=>array('create')),
-	array('label'=>'Manage Specialties', 'url'=>array('admin')),
+	array('label'=>'Create Food', 'url'=>array('create')),
+	array('label'=>'Manage Food', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Specialties</h1>
+<h1>Foods</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

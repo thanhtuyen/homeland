@@ -1,9 +1,9 @@
 <?php
-/* @var $this EconomyController */
+/* @var $this FoodController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Economies',
+	'Foods',
 );
 
 $this->menu=array(
@@ -12,7 +12,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Economies</h1>
+<h1>Foods</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

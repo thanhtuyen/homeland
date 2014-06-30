@@ -3,116 +3,275 @@
 /* @var $model Specialties */
 /* @var $form CActiveForm */
 ?>
+<style>
+  .well{
+    background-color: white !important;
 
+  }
+  .span-19{
+    width: 100%!important;
+  }
+
+  #gallery{
+    width: 100%!important;
+    margin: 0 auto;
+  }
+  #gallery ul{
+    padding-left: 30%;
+    /*text-align: center;*/
+
+  }
+
+  #gallery li {
+    display: inline;
+    margin-right: 5px;
+    padding-top: 3px;
+
+  }
+  #gallery_file{
+    width: 100%!important;
+    margin: 0 auto;
+  }
+  #gallery_file ul{
+    padding-left: 30%;
+    /*text-align: center;*/
+
+  }
+  #gallery_file li {
+    display: inline;
+    margin-right: 5px;
+    padding-top: 3px;
+
+  }
+</style>
+<input type="hidden"id="specialties_id" value="<?php echo  $model->id;?>">
 <div class="form">
+  <?php
+  $form = $this->beginWidget(
+    'booster.widgets.TbActiveForm',
+    array(
+      'id' => 'specialties-form',
+      'type' => 'horizontal',
+      'htmlOptions' => array('class' => 'well', 'enctype' => 'multipart/form-data'),
+      'enableAjaxValidation'=>false,
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'specialties-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
+    )
+  );
+  echo $form->errorSummary($model);
+  echo '<p class="note">Fields with <span class="required">*</span> are required.</p>';
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+  if($model->isNewRecord){
+    $menu_detail = Category::model()->findByPk($category_id);
+    $parents[$category_id] = $menu_detail->name;
+//    print_r($parents[$category_id] );die;
+    echo $form->dropDownListGroup(
+      $model,
+      'category_id',
+      array(
+        'wrapperHtmlOptions' => array(
+          'class' => 'col-sm-5',
+        ),
+        'widgetOptions' => array(
+          'data' => $parents,
+          'htmlOptions' => array('disabled'=> true),
+        )
+      )
+    );
+    echo '<input type="hidden" name="category_id" value="'.$category_id.'">';
+    //echo $form->dropDownList($model,'menu_id',$parents ,array( 'prompt'=>'Chọn menu ...'));
+  } else {
+    //$parents = Detailmenu::getListMenu($model->menu_id);
+    $menu_detail = Category::model()->findByPk($model->category_id);
+    $parents[$menu_id] = $menu_detail->name;
+    echo $form->dropDownListGroup($model,'category_id',
+      array(
+        'wrapperHtmlOptions' => array(
+          'class' => 'col-sm-5',
+        ),
+        'widgetOptions' => array(
+          'data' => $parents,
+          'htmlOptions' => array('disabled'=> true),
+        )
+      )
+     );
+  }
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textArea($model,'title',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'title'); ?>
-	</div>
+  echo $form->textFieldGroup( $model,'title',  array('wrapperHtmlOptions' => array( 'class' => 'textfield', )  ) );
+  echo $form->ckEditorGroup( $model,'content',  array('wrapperHtmlOptions' => array( ),
+                                                'widgetOptions' => array(
+                                                  'editorOptions' => array(
+                                                    'fullpage' => 'js:true',
+                                                    /* 'width' => '640', */
+                                                    /* 'resize_maxWidth' => '640', */
+                                                    /* 'resize_minWidth' => '320'*/
+                                                  )
+                                                )) );
+  echo $form->textFieldGroup( $model,'tieude',  array('wrapperHtmlOptions' => array( 'class' => 'textfield', )  ) );
+  echo $form->ckEditorGroup( $model,'noidung',  array('wrapperHtmlOptions' => array( ),
+    'widgetOptions' => array(
+      'editorOptions' => array(
+        'fullpage' => 'js:true',
+        /* 'width' => '640', */
+        /* 'resize_maxWidth' => '640', */
+        /* 'resize_minWidth' => '320'*/
+      )
+    )) );
+  echo '<div class="form-group">';
+    echo'<label class="col-sm-3 control-label" for="specialties_image">Image</label>';
+     echo '<div class="col-sm-9">';
+      $this->widget('CMultiFileUpload', array(
+      'model' => $model,
+      'attribute' => 'image',
+      'max' => 6
+      ));
+    echo'</div>';
+  echo'</div>';
+  if($model->image) {
+    echo '<div id="gallery">
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'tieude'); ?>
-		<?php echo $form->textArea($model,'tieude',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'tieude'); ?>
-	</div>
+      </div>';
+  }
+  echo '<div class="form-group">';
+    echo'<label class="col-sm-3 control-label" for="specialties_image">File</label>';
+    echo '<div class="col-sm-9">';
+    $this->widget('CMultiFileUpload', array(
+      'model' => $model,
+      'attribute' => 'file',
+      'max' => 6
+    ));
+    echo'</div>';
+  echo'</div>';
+//  if($model->file){
+    echo '<div id="gallery_file">
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'content'); ?>
-		<?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'content'); ?>
-	</div>
+      </div>';
+//  }
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'noidung'); ?>
-		<?php echo $form->textArea($model,'noidung',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'noidung'); ?>
-	</div>
+  echo $form->fileFieldGroup( $model,'video',  array('wrapperHtmlOptions' => array( 'class' => 'col-sm-5', )  ) );
+  $video = Yii::app()->request->baseUrl.Specialties::video_url.''.$model->video;
+  if($model->video){?>
+ <div class="form-group">
+   <label class="col-sm-3 control-label" for="Specialties_image"></label>
+   <div class="col-sm-9">
+     <video width="225" height="200" id="player2" controls="controls">
+       <source width="225" height="180" src="<?php echo $video;?>" type="video/mp4">
+     </video>
+   </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'is_public'); ?>
-		<?php echo $form->textField($model,'is_public'); ?>
-		<?php echo $form->error($model,'is_public'); ?>
-	</div>
+  </div>
+  <?php
+  }
+  ?>
+  <?php
+  echo $form->radioButtonListGroup(
+    $model,
+    'is_public',
+    array(
+      'widgetOptions' => array(
+        'data' => array(
+          'Công khai',
+          'Không công khai',
+        )
+      )
+    )
+  );
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'category_id'); ?>
-		<?php echo $form->textField($model,'category_id'); ?>
-		<?php echo $form->error($model,'category_id'); ?>
-	</div>
+  echo $form->radioButtonListGroup(
+    $model,
+    'feature_flag',
+    array(
+      'widgetOptions' => array(
+        'data' => array(
+          'Không đặt ở trang chủ',
+          'Trung tâm',
+          'Bên trái',
+        )
+      )
+    )
+  );
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'del_flag'); ?>
-		<?php echo $form->textField($model,'del_flag'); ?>
-		<?php echo $form->error($model,'del_flag'); ?>
-	</div>
+  echo '<div style="text-align: center">';
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'feature_flag'); ?>
-		<?php echo $form->textField($model,'feature_flag'); ?>
-		<?php echo $form->error($model,'feature_flag'); ?>
-	</div>
+      if($model->isNewRecord) {
+        $this->widget(
+          'booster.widgets.TbButton',
+          array('buttonType' => 'submit', 'label' => 'Create', 'context' => 'primary',)
+        );
+      } else {
+        $this->widget(
+          'booster.widgets.TbButton',
+          array('buttonType' => 'submit', 'label' => 'Save', 'context' => 'primary',)
+        );
+      }
+    $this->widget(
+      'booster.widgets.TbButton',
+      array('buttonType' => 'button', 'label' => 'Cancel')
+    );
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'create_user'); ?>
-		<?php echo $form->textField($model,'create_user'); ?>
-		<?php echo $form->error($model,'create_user'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_user'); ?>
-		<?php echo $form->textField($model,'updated_user'); ?>
-		<?php echo $form->error($model,'updated_user'); ?>
-	</div>
+  echo '</div>';
+  $this->endWidget();
+  ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'create_date'); ?>
-		<?php echo $form->textField($model,'create_date'); ?>
-		<?php echo $form->error($model,'create_date'); ?>
-	</div>
+</div>
+<script>
+  var id = $('#specialties_id').val();
+  $.ajax( {
+    type: 'GET',
+    url: '../../specialties/delete_image',
+    data: "id="+id,
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_date'); ?>
-		<?php echo $form->textField($model,'updated_date'); ?>
-		<?php echo $form->error($model,'updated_date'); ?>
-	</div>
+    success: function(data) {
+      $('#gallery').html(data);
+    }
+  } );
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'image'); ?>
-		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>256)); ?>
-		<?php echo $form->error($model,'image'); ?>
-	</div>
+  function delete_image_name(elm){
+    var result = confirm("Bạn thật sự muốn xóa hình  này?");
+    if (result==true) {
+      $.ajax( {
+        type: 'GET',
+        url: '../../specialties/delete_image',
+        data: "id="+id+"&image_name="+elm.name,
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'video'); ?>
-		<?php echo $form->textField($model,'video',array('size'=>60,'maxlength'=>256)); ?>
-		<?php echo $form->error($model,'video'); ?>
-	</div>
+        success: function(data) {
+          $( "#gallery" ).load( "/admin.php/specialties/delete_image?id="+id, function() {
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'file'); ?>
-		<?php echo $form->textField($model,'file',array('size'=>60,'maxlength'=>256)); ?>
-		<?php echo $form->error($model,'file'); ?>
-	</div>
+          });
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+        }
+      } );
+    }
+  }
+  $.ajax( {
+    type: 'GET',
+    url: '../../specialties/delete_file',
+    data: "id="+id,
 
-<?php $this->endWidget(); ?>
+    success: function(data) {
+      $('#gallery_file').html(data);
+    }
+  } );
 
-</div><!-- form -->
+  function delete_file_name(elm){
+    var result = confirm("Bạn thật sự muốn xóa hình  này?");
+    if (result==true) {
+      $.ajax( {
+        type: 'GET',
+        url: '../../specialties/delete_file',
+        data: "id="+id+"&file_name="+elm.name,
+
+        success: function(data) {
+          $( "#gallery_file" ).load( "/admin.php/specialties/delete_file?id="+id, function() {
+
+          });
+
+        }
+      } );
+    } else {
+      elm.checked = false;
+
+    }
+  }
+</script>

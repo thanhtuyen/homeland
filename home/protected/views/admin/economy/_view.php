@@ -1,6 +1,6 @@
 <?php
-/* @var $this EconomyController */
-/* @var $data Economy */
+/* @var $this FoodController */
+/* @var $data Food */
 ?>
 
 <div class="view">

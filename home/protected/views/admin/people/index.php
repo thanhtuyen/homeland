@@ -1,5 +1,5 @@
 <?php
-/* @var $this PeopleController */
+/* @var $this FoodController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(

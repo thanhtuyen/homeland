@@ -1,18 +1,18 @@
 <?php
-/* @var $this HistoricalController */
+/* @var $this FoodController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Historicals',
+	'Foods',
 );
 
 $this->menu=array(
-	array('label'=>'Create Historical', 'url'=>array('create')),
-	array('label'=>'Manage Historical', 'url'=>array('admin')),
+	array('label'=>'Create historical', 'url'=>array('create')),
+	array('label'=>'Manage historical', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Historicals</h1>
+<h1>Foods</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

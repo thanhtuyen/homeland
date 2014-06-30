@@ -1,6 +1,6 @@
 <?php
-/* @var $this CultureController */
-/* @var $data Culture */
+/* @var $this FoodController */
+/* @var $data Food */
 ?>
 
 <div class="view">

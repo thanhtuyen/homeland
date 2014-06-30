@@ -1,6 +1,6 @@
 <?php
-/* @var $this TravelController */
-/* @var $data Travel */
+/* @var $this FoodController */
+/* @var $data Food */
 ?>
 
 <div class="view">

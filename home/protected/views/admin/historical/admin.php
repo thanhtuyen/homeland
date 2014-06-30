@@ -1,16 +1,21 @@
+<style>
+  .span-19 {
+    width:100% !important;
+  }
+</style>
 <?php
-/* @var $this HistoricalController */
-/* @var $model Historical */
+/* @var $this FoodController */
+/* @var $model Food */
 
 $this->breadcrumbs=array(
-	'Historicals'=>array('index'),
-	'Manage',
+  'Historical'=>array('index'),
+  'Manage',
 );
 
-$this->menu=array(
-	array('label'=>'List Historical', 'url'=>array('index')),
-	array('label'=>'Create Historical', 'url'=>array('create')),
-);
+//$this->menu=array(
+//	array('label'=>'List Food', 'url'=>array('index')),
+//	array('label'=>'Create Food', 'url'=>array('create')),
+//);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -26,45 +31,49 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Historicals</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+  <?php $this->renderPartial('_search',array(
+    'model'=>$model,
+  )); ?>
 </div><!-- search-form -->
+<div style="text-align:right">
+  <?php
+  //$detail_menu_record = Detailmenu::model()->getDetailMenu($menu_id);
+  if($category_id){
+    echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl.'/images/icon/bplus.png',"bCreate",array("class"=>"icon_plus", 'title'=>'Thêm mới Chi Tiết historical')), Yii::app()->createUrl('/historical/create?category_id='.$category_id)) ;
+  } else {
+    echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl.'/images/icon/bplus.png',"bCreate",array("class"=>"icon_plus", 'title'=>'Thêm mới Chi Tiết historical')), Yii::app()->createUrl('/historical/create')) ;
+  }
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'historical-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'title',
-		'tieude',
-		'content',
-		'noidung',
-		'is_public',
-		/*
-		'category_id',
-		'del_flag',
-		'feature_flag',
-		'create_user',
-		'updated_user',
-		'create_date',
-		'updated_date',
-		'image',
-		'video',
-		'file',
-		*/
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+  ?>
+</div>
+<?php
+$gridColumns = array(
+  array('name'=>'id', 'header'=>'#', 'htmlOptions'=>array('style'=>'width: 60px')),
+  array('name'=>'title', 'header'=>'title'),
+  array('name'=>'tieude', 'header'=>'Tiêu đề'),
+  array('name'=>'create_user', 'header'=>'Người tạo'),
+  array('name'=>'create_date',
+    'value'=> 'date("d-m-Y","$data->create_date")',
+    'header'=>'Ngày tạo'),
+  array(
+    'htmlOptions' => array('nowrap'=>'nowrap'),
+    'class'=>'booster.widgets.TbButtonColumn',
+    'viewButtonUrl'=>'Yii::app()->createUrl("historical/view",array("id"=>$data->id))',
+    'updateButtonUrl'=>'Yii::app()->createUrl("historical/update",array("id"=>$data->id))',
+    'deleteButtonUrl'=>null,
+  )
+);
+$this->widget(
+  'booster.widgets.TbGridView',
+  array(
+    'id'=>'historical-grid',
+    'dataProvider' => $model->search(),
+    'template' => "{items}{pager}",
+    'enablePagination' => true,
+    'columns' => $gridColumns,
+  )
+);
+
+?>
