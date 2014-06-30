@@ -18,6 +18,15 @@
  */
 class Category extends CActiveRecord
 {
+  const NATURES_MENU = 1;
+  const FOOD_MENU = 2;
+  const CULTURE_MENU = 3;
+  const ECONOMY_MENU = 4;
+  const HISTORICAL_MENU = 5;
+  const PEOPLE_MENU = 6;
+  const TRAVEL_MENU = 7;
+  const SPECIALITES_MENU = 8;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -177,6 +186,9 @@ class Category extends CActiveRecord
         $url = "../food/admin";
       }
       if ($category['menu_type']==3) {
+        $url = "../culture/admin";
+      }
+      if ($category['menu_type']==3) {
         $url = "../travel/admin";
       }
       $tree[] = array(
@@ -185,6 +197,20 @@ class Category extends CActiveRecord
       );
     }
     return $tree;
+  }
+
+  public function getListMenuType()
+  {
+    return array(
+      self:: NATURES_MENU => 'Thiên Nhiên',
+      self:: FOOD_MENU => 'Thức ăn',
+      self:: CULTURE_MENU => 'Văn Hóa',
+      self:: ECONOMY_MENU => 'Kinh Tế',
+      self:: HISTORICAL_MENU => 'Lịch Sử',
+      self:: PEOPLE_MENU => 'Con Người',
+      self:: TRAVEL_MENU => 'Tour',
+      self:: SPECIALITES_MENU => 'Đặc Sản'
+    );
   }
 
 }

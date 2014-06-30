@@ -3,7 +3,12 @@
 /* @var $model Category */
 /* @var $form CActiveForm */
 ?>
+<style>
+  .well{
+    background-color: white !important;
 
+  }
+</style>
 <div class="form">
 
 <?php
@@ -62,7 +67,35 @@
         )
       )
     )
-  );?>
+  );
+    $list_menu_type = Category::model()->getListMenuType();
+
+    if($model->isNewRecord) {
+      echo $form->dropDownListGroup(  $model,  'menu_type',
+        array(
+          'wrapperHtmlOptions' => array(
+            'class' => 'col-sm-5',
+          ),
+          'widgetOptions' => array(
+            'data' => $list_menu_type,
+            'htmlOptions' => array(),
+          )
+        )
+      );
+    } else {
+      echo $form->dropDownListGroup(  $model,  'menu_type',
+        array(
+          'wrapperHtmlOptions' => array(
+            'class' => 'col-sm-5',
+          ),
+          'widgetOptions' => array(
+            'data' => $list_menu_type,
+            'htmlOptions' => array('disabled'=> true),
+          )
+        )
+      );
+    }
+?>
   <div style="text-align: center">
       <?php
       if($model->isNewRecord) {
