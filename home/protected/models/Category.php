@@ -108,7 +108,7 @@ class Category extends CActiveRecord
 		$criteria->compare('tieude',$this->tieude,true);
 		$criteria->compare('priority',$this->priority);
 		$criteria->compare('parent_id',$this->parent_id);
-		$criteria->compare('del_flag',$this->del_flag);
+    $criteria->addCondition("del_flag = 0");
 		$criteria->compare('create_user',$this->create_user);
 		$criteria->compare('updated_user',$this->updated_user);
 		$criteria->compare('create_date',$this->create_date);
@@ -188,11 +188,14 @@ class Category extends CActiveRecord
       if ($category['menu_type']==3) {
         $url = "../culture/admin";
       }
-      if ($category['menu_type']==3) {
+      if ($category['menu_type']==4) {
         $url = "../travel/admin";
       }
       $tree[] = array(
-        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude'].'  ('.$category['name'].')'), array('update', 'id'=>$category['id'])).'</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default" href="'.$url.'?category_id='.$category['id'].'"><i class="icon-list-alt"></i>Nội dung</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-confirm delete" href="'.Yii::app()->createUrl("category/delete",array("id"=>$category["id"])).'"><i class="icon-trash"></i>Xóa</a> ',
+        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude'].'  ('.$category['name'].')'),
+          array('update', 'id'=>$category['id'])).'</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default"
+          href="'.$url.'?category_id='.$category['id'].'"><i class="icon-list-alt"></i>Nội dung</a>&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-danger btn-confirm delete" href="'.Yii::app()->createUrl("category/delete",array("id"=>$category["id"])).'"><i class="icon-trash"></i>Xóa</a> ',
         'children' => self::findTreeMenu($category->attributes['id'], $category->attributes['menu_type'])
       );
     }

@@ -64,23 +64,38 @@
 		</div>
 		<div id="navigation">
 			<ul>
-				<li id="home_page"><?php echo CHtml::link("Trang chủ",  Yii::app()->urlManager->createUrl('/site/index')) ;?></li>
-				<li><?php echo CHtml::link("Thiên nhiên",  Yii::app()->createAbsoluteUrl('Site/Contact')) ;?></li>
-				<li><?php echo CHtml::link('Món ngon',
-				    array(
-				        'id'=>2,
-				        'title'=>"Món ngon",
-				        'lang'=>Yii::app()->language
-				        )
-				    );?>
-				 </li>
-				<li><a href="beauty_care.html">Văn hóa</a></li>
-				<li><a href="shoes.html">Tour</a></li>
-				<li><a href="accessories.html">Đặc sản</a></li>
-				<li><a href="jewelry.html">Di tích</a></li>
-				<li><a href="jewelry.html">Con người</a></li>
-				<li><a href="jewelry.html">Kinh tế</a></li>
+        <li id="home_page"><?php echo CHtml::link("Trang chủ",  Yii::app()->urlManager->createUrl('/site/index')) ;?></li>
+        <?php
+
+        $array_parent_id = array();
+        $array_sub_id = array();
+        $parent_menu = HomeController::getListParentMenuSortPriority(0);
+        foreach($parent_menu as $pm){
+          if($pm->menu_type == 1) {
+            echo ' <li id="home_page">'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Nature/index')).'</li>';
+          }
+
+        }
+        ?>
+<!--				<li id="home_page">--><?php //echo CHtml::link("Trang chủ",  Yii::app()->urlManager->createUrl('/site/index')) ;?><!--</li>-->
+<!--        <li>--><?php //echo CHtml::link("Thiên nhiên",  Yii::app()->createAbsoluteUrl('Site/Contact')) ;?><!--</li>-->
+<!--        <li>--><?php //echo CHtml::link('Món ngon',
+//            array(
+//              'id'=>2,
+//              'title'=>"Món ngon",
+//              'lang'=>Yii::app()->language
+//            )
+//          );
+// <!--         ?>
+<!--				 </li>-->
+<!--				<li><a href="beauty_care.html">Văn hóa</a></li>-->
+<!--				<li><a href="shoes.html">Tour</a></li>-->
+<!--				<li><a href="accessories.html">Đặc sản</a></li>-->
+<!--				<li><a href="jewelry.html">Di tích</a></li>-->
+<!--				<li><a href="jewelry.html">Con người</a></li>-->
+<!--				<li><a href="jewelry.html">Kinh tế</a></li>-->
 			</ul>
+
 		</div>
 	</div> 
 	<?php echo $content; ?>

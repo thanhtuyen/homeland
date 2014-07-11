@@ -27,62 +27,94 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-<div class="tree" style="width: 100%;">
-<?php
+<div id="menu-grid">
+  <div class="tree" style="width: 100%;">
+  <?php
 
-$this->widget('CTreeView',array(
+  $this->widget('CTreeView',array(
 
-  'data'=>$dataProvider,
+    'data'=>$dataProvider,
 
-  'prerendered' => 'true',
+    'prerendered' => 'true',
 
-  'animated'=>'fast', //quick animation
+    'animated'=>'fast', //quick animation
 
-  'cssFile' =>  'false',
+    'cssFile' =>  'false',
 
-  'collapsed'=>'true',//remember must giving quote for boolean value in here
+    'collapsed'=>'true',//remember must giving quote for boolean value in here
 
 
 
-));
+  ));
 
-?>
+  ?>
 
+  </div>
 </div>
 
-<!--<h1>Manage Categories</h1>-->
-<!---->
-<!--<p>-->
-<!--You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>-->
-<!--or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.-->
-<!--</p>-->
-<!---->
-<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<!--<div class="search-form" style="display:none">-->
-<?php //$this->renderPartial('_search',array(
-//	'model'=>$model,
-//)); ?>
-<!--</div><!-- search-form -->
-<!---->
-<?php //$this->widget('zii.widgets.grid.CGridView', array(
-//	'id'=>'category-grid',
-//	'dataProvider'=>$model->search(),
-//	'filter'=>$model,
-//	'columns'=>array(
-//		'id',
-//		'name',
-//		'tieude',
-//		'priority',
-//		'parent_id',
-//		'del_flag',
-//		/*
-//		'create_user',
-//		'updated_user',
-//		'create_date',
-//		'updated_date',
-//		*/
-//		array(
-//			'class'=>'CButtonColumn',
-//		),
-//	),
-//)); ?>
+<script type="text/javascript">
+
+  /*<![CDATA[*/
+
+  jQuery(function($) {
+
+
+
+    $('.search-button').click(function(){
+
+      $('.search-form').toggle();
+
+      return false;
+
+    });
+
+    $('.search-form form').submit(function(){
+
+      $('#menu-grid').yiiGridView('update', {
+
+        data: $(this).serialize()
+
+      });
+
+      return false;
+
+    });
+
+
+
+    jQuery(document).on('click','#menu-grid a.delete',function() {
+
+      if(!confirm('Bạn có chắc là muốn xóa?')) return false;
+
+      $.ajax({
+
+        type: "POST",
+
+        url: jQuery(this).attr('href'),
+
+        data: data,
+
+        success: success,
+
+        dataType: dataType
+
+      });
+
+
+
+      return false;
+
+    });
+
+    jQuery('#menu-grid').yiiGridView({'ajaxUpdate':['menu-grid'],'ajaxVar':'ajax','pagerClass':'pager','loadingClass':'grid-view-loading','filterClass':'filters','tableClass':'items','selectableRows':1,'enableHistory':false,'updateSelector':'{page}, {sort}','filterSelector':'{filter}','pageVar':'Menu_page'});
+
+    jQuery('body').tooltip({'selector':'a[rel=tooltip]'});
+
+    jQuery('body').popover({'selector':'a[rel=popover]'});
+
+  });
+
+  /*]]>*/
+
+</script>
+

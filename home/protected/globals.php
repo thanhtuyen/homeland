@@ -167,7 +167,7 @@ function Clean($arr){
 }
  function deleteRow($model)
 {
-  $model->del_flg = 1;
+  $model->del_flag = 1;
   $model->save();
 
 }

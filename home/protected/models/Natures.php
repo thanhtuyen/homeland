@@ -133,7 +133,7 @@ class Natures extends CActiveRecord
 		$criteria->compare('noidung',$this->noidung,true);
 		$criteria->compare('is_public',$this->is_public);
 		$criteria->compare('category_id',$this->category_id);
-		$criteria->compare('del_flag',$this->del_flag);
+    $criteria->addCondition("del_flag = 0");
 		$criteria->compare('feature_flag',$this->feature_flag);
 		$criteria->compare('create_user',$this->create_user);
 		$criteria->compare('updated_user',$this->updated_user);

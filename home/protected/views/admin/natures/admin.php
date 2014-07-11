@@ -62,7 +62,7 @@ $gridColumns = array(
     'class'=>'booster.widgets.TbButtonColumn',
     'viewButtonUrl'=>'Yii::app()->createUrl("natures/view",array("id"=>$data->id))',
     'updateButtonUrl'=>'Yii::app()->createUrl("natures/update",array("id"=>$data->id))',
-    'deleteButtonUrl'=>null,
+    'deleteButtonUrl'=>'Yii::app()->createUrl("natures/delete",array("id"=>$data->id))',
   )
 );
 $this->widget(

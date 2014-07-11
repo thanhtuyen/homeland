@@ -60,13 +60,13 @@
                 )
               ),
               array('label' => 'Thiên nhiên', 'url' => '/admin.php/natures/admin'),
-              array('label' => 'Food', 'url' => '/admin.php/food/admin'),
-              array('label' => 'Culture', 'url' => '/admin.php/culture/admin'),
-              array('label' => 'Economy', 'url' => '/admin.php/economy/admin'),
-              array('label' => 'Historical', 'url' => '/admin.php/historical/admin'),
-              array('label' => 'Specialties', 'url' => '/admin.php/specialties/admin'),
-              array('label' => 'People', 'url' => '/admin.php/people/admin'),
-              array('label' => 'Travel', 'url' => '/admin.php/travel/admin'),
+              array('label' => 'Món ngon', 'url' => '/admin.php/food/admin'),
+              array('label' => 'Văn hóa', 'url' => '/admin.php/culture/admin'),
+              array('label' => 'Kinh Tế', 'url' => '/admin.php/economy/admin'),
+              array('label' => 'Lịch Sử', 'url' => '/admin.php/historical/admin'),
+              array('label' => 'Đặc Sản', 'url' => '/admin.php/specialties/admin'),
+              array('label' => 'Con Người', 'url' => '/admin.php/people/admin'),
+              array('label' => 'Du lịch', 'url' => '/admin.php/travel/admin'),
 
             )
           )

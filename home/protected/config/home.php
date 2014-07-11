@@ -14,10 +14,15 @@ return CMap::mergeArray(
 			),
 				*/
 			'urlManager'=>array(
-		    'urlFormat'=>'path',
-		    'showScriptName' => false,
+        'urlFormat'=>'path',
+        //'class'=>'application.components.UrlManager',
+        'showScriptName'=>false, // hiden index.php
+
+        'caseSensitive'=>false,
+
 		    'rules'=>array(
-		                '<lang:\w+>/post-<id:\d+>/<title:.*?>' => array('post/view', 'urlSuffix' => '/', 'caseSensitive' => false),
+          '<language:(vi|en)>/' => 'site/index',
+		      '<lang:\w+>/post-<id:\d+>/<title:.*?>' => array('post/view', 'urlSuffix' => '/', 'caseSensitive' => false),
 	        '<lang:\w+>/<controller:\w+>/<id:\d+>'=>'<controller>/view',
 	        '<lang:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 	        '<lang:\w+>/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
