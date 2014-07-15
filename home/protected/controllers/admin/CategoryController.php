@@ -71,11 +71,12 @@ class CategoryController extends Controller
 		if(isset($_POST['Category']))
 		{
 			$model->attributes=$_POST['Category'];
+      $model->create_date = time();
+      $model->create_user =  1;
+      $model->menu_type = $_POST['Category']['menu_type'];
+
       if ($model->validate()) {
         $model->name = CHtml::decode($model->name);
-        $model->create_date = time();
-        $model->create_user =  1;
-       // echo $model->parent_id;die;
         if($model->save())
           $this->redirect(array('view','id'=>$model->id));
       }

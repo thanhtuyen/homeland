@@ -20,6 +20,7 @@
 	// See class documentation of CActiveForm for details on this.
 //	'enableAjaxValidation'=>false,
 //));
+
   $form = $this->beginWidget(
     'booster.widgets.TbActiveForm',
     array(
@@ -29,6 +30,7 @@
       'enableAjaxValidation'=>false,
     )
   );
+echo $form->errorSummary($model);
     echo '<p class="note">Fields with <span class="required">*</span> are required.</p>';
   $parent = Category::model()->listCategory();
   $list_category = array(0 => 'Root') + $parent;

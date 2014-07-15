@@ -60,7 +60,7 @@ class HomeController extends CController
   public function getListParentMenuSortPriority ($parent_id = 0) {
   	if($parent_id != '0')
 	    $menu_list = Category::model()->findAll(array(
-	      'condition' => 'parent_id = :parent_id AND del_flg = :del_flag AND priority != :priority',
+	      'condition' => 'parent_id = :parent_id AND del_flag = :del_flag AND priority != :priority',
 	      'order' => 'priority ASC, create_date DESC',
 	      'params' => array(':parent_id' => $parent_id,
 	        ':del_flag' => 0,
