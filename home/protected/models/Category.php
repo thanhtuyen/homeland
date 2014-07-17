@@ -182,17 +182,26 @@ class Category extends CActiveRecord
       if ($category['menu_type']==1) {
         $url = "../natures/admin";
       }
-      if ($category['menu_type']==2) {
+      else if ($category['menu_type']==2) {
         $url = "../food/admin";
       }
-      if ($category['menu_type']==3) {
+      else if ($category['menu_type']==3) {
         $url = "../culture/admin";
       }
-      if ($category['menu_type']==4) {
+      else if ($category['menu_type']==4) {
         $url = "../travel/admin";
       }
+      else if ($category['menu_type']==5) {
+        $url = "../historical/admin";
+      }else if ($category['menu_type']==6) {
+        $url = "../people/admin";
+      }else if ($category['menu_type']==7) {
+        $url = "../travel/admin";
+      }else {
+        $url = "../specialties/admin";
+      }
       $tree[] = array(
-        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude'].'  ('.$category['name'].')'),
+        'text' => '<span><i class="'.$class.'"></i> <b>'.CHtml::link(CHtml::encode($category['tieude']),
           array('update', 'id'=>$category['id'])).'</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default"
           href="'.$url.'?category_id='.$category['id'].'"><i class="icon-list-alt"></i>Nội dung</a>&nbsp;&nbsp;&nbsp;
           <a class="btn btn-danger btn-confirm delete" href="'.Yii::app()->createUrl("category/delete",array("id"=>$category["id"])).'"><i class="icon-trash"></i>Xóa</a> ',
@@ -215,5 +224,7 @@ class Category extends CActiveRecord
       self:: SPECIALITES_MENU => 'Đặc Sản'
     );
   }
+
+
 
 }

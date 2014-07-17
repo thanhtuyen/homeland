@@ -78,4 +78,18 @@ class HomeController extends CController
     return $menu_list;
   }
 
+
+  public function getListMenuByMenuType( $parent_id, $menu_type)
+  {
+    $sub_menu_list = Category::model()->findAll(array(
+      'condition' => 'del_flag = :del_flag AND  parent_id = :parent_id AND menu_type = :menu_type',
+      'order' => 'create_date DESC',
+      'params' => array(':menu_type' => $menu_type,
+        ':del_flag' => 0,
+        ':parent_id' =>  $parent_id,
+      )
+    ));
+
+    return $sub_menu_list;
+  }
 }

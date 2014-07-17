@@ -63,7 +63,7 @@
 
   if($model->isNewRecord){
     $menu_detail = Category::model()->findByPk($category_id);
-    $parents[$category_id] = $menu_detail->name;
+    $parents[$category_id] = $menu_detail->tieude;
 //    print_r($parents[$category_id] );die;
     echo $form->dropDownListGroup(
       $model,
@@ -83,7 +83,7 @@
   } else {
     //$parents = Detailmenu::getListMenu($model->menu_id);
     $menu_detail = Category::model()->findByPk($model->category_id);
-    $parents[$menu_id] = $menu_detail->name;
+    $parents[$menu_id] = $menu_detail->tieude;
     echo $form->dropDownListGroup($model,'category_id',
       array(
         'wrapperHtmlOptions' => array(

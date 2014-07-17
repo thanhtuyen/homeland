@@ -18,4 +18,4 @@ $this->breadcrumbs=array(
 
 <h1>Update Natures <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'category_id'=>$category_id)); ?>

@@ -1,0 +1,183 @@
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `priority` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `menu_type` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `food`;
+CREATE TABLE IF NOT EXISTS `food` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `natures`;
+CREATE TABLE IF NOT EXISTS `natures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `culture`;
+CREATE TABLE IF NOT EXISTS `culture` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `economy`;
+CREATE TABLE IF NOT EXISTS `economy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `historical`;
+CREATE TABLE IF NOT EXISTS `historical` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `people`;
+CREATE TABLE IF NOT EXISTS `people` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `specialties`;
+CREATE TABLE IF NOT EXISTS `specialties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+DROP TABLE IF EXISTS `travel`;
+CREATE TABLE IF NOT EXISTS `travel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `tieude` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` int(11) NOT NULL DEFAULT '1',
+  `category_id` int(11) DEFAULT NULL,
+  `del_flag` int(11) NOT NULL DEFAULT '0',
+  `feature_flag` int(11) NOT NULL DEFAULT '0',
+  `create_user` int(11) NOT NULL,
+  `updated_user` int(11) DEFAULT NULL,
+  `create_date` int(11) NOT NULL,
+  `updated_date` int(11) DEFAULT NULL,
+  `image` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

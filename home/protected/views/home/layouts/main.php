@@ -85,197 +85,121 @@
 			</form>
 		</div>
 
-
-
     <nav id="menu" class="menu">
       <ul>
-        <li class="has-submenu"><a href="#">For Facilities</a>
-          <ul class="sub-menu">
-            <li><a href="#">Artificial Turf</a></li>
-            <li class="has-submenu">
-              <a href="#">Batting Cages</a>
-              <ul>
-                <li><a href="#">Indoor</a></li>
-                <li><a href="#">Outdoor</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Benches &amp; Bleachers</a></li>
-            <li><a href="#">Communication Devices</a></li>
-            <li><a href="#">Dugouts</a></li>
-            <li><a href="#">Fencing &amp; Windscreen</a></li>
-            <li><a href="#">Floor Protectors</a></li>
-            <li><a href="#">Foul Poles</a></li>
-            <li><a href="#">Shade Structures</a></li>
-          </ul>
-        </li>
-        <li class="has-submenu"><a href="#">Field Maintenance</a>
-          <ul class="sub-menu">
-            <li><a href="#">All-in-One Team Cart</a></li>
-            <li><a href="#">Air &amp; Electrical Reels</a></li>
-            <li><a href="#">Field Drags</a></li>
-            <li class="has-submenu">
-              <a href="#">Field Marking Equipment</a>
-              <ul>
-                <li><a href="#">Batter's Box Templates</a></li>
-                <li><a href="#">Dryline Markers</a></li>
-                <li><a href="#">Field Paint</a></li>
-                <li><a href="#">Field Sprayers</a></li>
-                <li><a href="#">Stencils</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#">Field Tarps</a>
-              <ul>
-                <li><a href="#">Area Tarps</a></li>
-                <li><a href="#">Growth Covers / Protectors</a></li>
-                <li><a href="#">Infield Tarps</a></li>
-                <li><a href="#">Tarp Accessories</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Hand Tools</a></li>
-            <li class="has-submenu">
-              <a href="#">Irrigation, Hoses, Nozzles</a>
-              <ul>
-                <li><a href="#">Hoses &amp; Hose Reels</a></li>
-                <li><a href="#">Irrigation</a></li>
-                <li><a href="#">Nozzles</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Layout &amp; Measurement Tools</a></li>
-            <li><a href="#">Moisture Removal</a></li>
-            <li><a href="#">Mound &amp; Home Plate Fortification</a></li>
-            <li><a href="#">Mowers &amp; Stripers</a></li>
-          </ul>
-        </li>
-        <li class="has-submenu"><a href="#">Game-Practice Equipment</a>
-          <ul class="sub-menu">
-            <li class="has-submenu">
-              <a href="#">Baseball - Softball</a>
-              <ul>
-                <li><a href="#">Base Accessories</a></li>
-                <li><a href="#">Bases &amp; Home Plates</a></li>
-                <li><a href="#">Game Accessories</a></li>
-                <li><a href="#">Pitching Rubbers</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#">Batting Practice Equipment</a>
-              <ul>
-                <li><a href="#">Backstops</a></li>
-                <li><a href="#">Infield Screens</a></li>
-                <li><a href="#">Jugs Pitching Machines</a></li>
-                <li><a href="#">Turf Mats</a></li>
-                <li><a href="#">Turf Protectors</a></li>
-                <li><a href="#">Replacement Accessories</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#">Batting Cages</a>
-              <ul>
-                <li><a href="#">Indoor</a></li>
-                <li><a href="#">Outdoor</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#">Portable Mounds</a>
-              <ul>
-                <li><a href="#">Batting Practice Mounds</a></li>
-                <li><a href="#">Game Mounds</a></li>
-                <li><a href="#">Practice Mounds</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#">Football</a>
-              <ul>
-                <li><a href="#">First Down Markers</a></li>
-                <li><a href="#">Football Accessories</a></li>
-                <li><a href="#">Football Goalposts</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#">Soccer</a>
-              <ul>
-                <li><a href="#">Soccer Goals</a></li>
-                <li><a href="#">Soccer Accessories</a></li>
-              </ul>
-            </li>
+        <li id="home_page has-submenu"><?php echo CHtml::link("Trang chủ",  Yii::app()->urlManager->createUrl('/site/index')) ;?></li>
+      <?php
 
-          </ul>
-        </li>
-        <li class="has-submenu"><a href="#">Training &amp; Conditioning</a>
-          <ul class="sub-menu">
-            <li><a href="#">Ladders &amp; Sticks</a></li>
-            <li><a href="#">Hurdles</a></li>
-            <li><a href="#">Training Accessories</a></li>
-            <li><a href="#">Smart-Cart Training System</a></li>
-          </ul>
-        </li>
-        <li class="has-submenu"><a href="#">Books-Videos</a>
-          <ul class="sub-menu">
-            <li><a href="#">Field Design &amp; Maintenance</a></li>
-            <li><a href="#">Turf Management</a></li>
-            <li><a href="#">Training</a></li>
-          </ul>
+        $array_parent_id = array();
+        $array_sub_id = array();
+        $parent_menu = HomeController::getListParentMenuSortPriority(0);
+        foreach($parent_menu as $pm){
+          if($pm->menu_type == 1) {
+            echo ' <li  class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Nature/index'));
+            echo     '<ul class="sub-menu">';
+                        $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+                      foreach($sub_menu_list as $sub_menu){
+                          echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/Nature/list', array('id'=> $sub_menu->id) )).'</li>';
+                      }
+            echo     '</ul>';
+
+            echo '</li>';
+
+          }else if($pm->menu_type == 2) {
+            echo ' <li class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Food/index'));
+                echo     '<ul class="sub-menu">';
+                $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+                foreach($sub_menu_list as $sub_menu){
+                  echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/Food/list', array('id'=> $sub_menu->id) )).'</li>';
+                }
+                echo     '</ul>';
+
+                echo '</li>';
+          } else if($pm->menu_type == 3) {
+            echo ' <li class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Culture/index'));
+                echo     '<ul class="sub-menu">';
+                $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+                foreach($sub_menu_list as $sub_menu){
+                  echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/Culture/list', array('id'=> $sub_menu->id) )).'</li>';
+                }
+                echo     '</ul>';
+
+                echo '</li>';
+          } else if($pm->menu_type == 4) {
+            echo ' <li class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Economy/index'));
+              echo     '<ul class="sub-menu">';
+              $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+              foreach($sub_menu_list as $sub_menu){
+                echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/Economy/list', array('id'=> $sub_menu->id) )).'</li>';
+              }
+              echo     '</ul>';
+
+              echo '</li>';
+          } else if($pm->menu_type == 5) {
+            echo ' <li class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Historical/index'));
+              echo     '<ul class="sub-menu">';
+              $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+              foreach($sub_menu_list as $sub_menu){
+                echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/Historical/list', array('id'=> $sub_menu->id) )).'</li>';
+              }
+              echo     '</ul>';
+
+              echo '</li>';
+          } else if($pm->menu_type == 6) {
+            echo ' <li class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/People/index'));
+              echo     '<ul class="sub-menu">';
+              $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+              foreach($sub_menu_list as $sub_menu){
+                echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/People/list', array('id'=> $sub_menu->id) )).'</li>';
+              }
+              echo     '</ul>';
+
+              echo '</li>';
+          } else  if($pm->menu_type == 7) {
+            echo ' <li class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Travel/index'));
+              echo     '<ul class="sub-menu">';
+              $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+              foreach($sub_menu_list as $sub_menu){
+                echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/Travel/list', array('id'=> $sub_menu->id) )).'</li>';
+              }
+              echo     '</ul>';
+
+              echo '</li>';
+          } else {
+            echo ' <li class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Specialties/index'));
+              echo     '<ul class="sub-menu">';
+              $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
+              foreach($sub_menu_list as $sub_menu){
+                echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/Specialties/list', array('id'=> $sub_menu->id) )).'</li>';
+              }
+              echo     '</ul>';
+
+              echo '</li>';
+          }
+
+
+
+        }
+        ?>
+
         </li>
       </ul>
     </nav>
+    <div class="body">
 
-    <!--    BEGIN MAIN MENU-->
-<!--		<div id="navigation">-->
-<!--      <div class="t3-megamenu">-->
-<!--			<ul class="menu">-->
-<!--        <li id="home_page">--><?php //echo CHtml::link("Trang chủ",  Yii::app()->urlManager->createUrl('/site/index')) ;?><!--</li>-->
-<!--        --><?php
-//
-//        $array_parent_id = array();
-//        $array_sub_id = array();
-//        $parent_menu = HomeController::getListParentMenuSortPriority(0);
-//        foreach($parent_menu as $pm){
-//          if($pm->menu_type == 1) {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Nature/index')).
-//
-//              ' <div class="nav-child dropdown-menu">
-//                <ul class="mega-nav">
-//                <li><a href="beauty_care.html">Văn hóa</a></li>
-//                  <li><a href="shoes.html">Tour</a></li>
-//                <li><a href="accessories.html">Đặc sản</a></li>
-//                </ul>
-//              </div>
-//
-//              </li>';
-//
-//          }else if($pm->menu_type == 2) {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Food/index')).'</li>';
-//          } else if($pm->menu_type == 3) {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Culture/index')).'</li>';
-//          } else if($pm->menu_type == 4) {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Economy/index')).'</li>';
-//          } else if($pm->menu_type == 5) {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Historical/index')).'</li>';
-//          } else if($pm->menu_type == 6) {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/People/index')).'</li>';
-//          } else  if($pm->menu_type == 7) {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Travel/index')).'</li>';
-//          } else {
-//            echo ' <li id='.$pm->id.'>'.CHtml::link($pm->tieude,  Yii::app()->urlManager->createUrl('/Specialties/index')).'</li>';
-//          }
-//
-//
-//
-//        }
-//        ?>
-<!--			</ul>-->
-<!--      </div>-->
-<!--		</div>-->
-<!--	</div>-->
-
-<!--  END MAIN MENU-->
       <?php echo $content; ?>
 
-	
+    </div>
 	<div class="footer">
-		<p>&#169; 2011 Herdesigns. All Rights Reserved.</p>
-	</div>
+    <span>copy right 2014<span>
+    <div class="connect">
 
+      <a href="http://facebook.com/freewebsitetemplates" id="facebook">Facebook</a>
+      <a href="http://twitter.com/fwtemplates" id="twitter">Twitter</a>
+      <a href="#" id="comments">Comments</a>
+      <a href="http://www.flickr.com/freewebsitetemplates/" id="flickr">Flickr</a>
+
+    </div>
+	</div>
 </body>
 </html>
