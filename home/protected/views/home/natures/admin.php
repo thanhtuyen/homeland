@@ -50,7 +50,19 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'tieude',
 		'content',
 		'noidung',
-		'genre_nature_id',
+		'is_public',
+		/*
+		'category_id',
+		'del_flag',
+		'feature_flag',
+		'create_user',
+		'updated_user',
+		'create_date',
+		'updated_date',
+		'image',
+		'video',
+		'file',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

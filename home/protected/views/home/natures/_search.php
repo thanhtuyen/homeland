@@ -37,8 +37,58 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'genre_nature_id'); ?>
-		<?php echo $form->textField($model,'genre_nature_id'); ?>
+		<?php echo $form->label($model,'is_public'); ?>
+		<?php echo $form->textField($model,'is_public'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'category_id'); ?>
+		<?php echo $form->textField($model,'category_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'del_flag'); ?>
+		<?php echo $form->textField($model,'del_flag'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'feature_flag'); ?>
+		<?php echo $form->textField($model,'feature_flag'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'create_user'); ?>
+		<?php echo $form->textField($model,'create_user'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'updated_user'); ?>
+		<?php echo $form->textField($model,'updated_user'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'create_date'); ?>
+		<?php echo $form->textField($model,'create_date'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'updated_date'); ?>
+		<?php echo $form->textField($model,'updated_date'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'image'); ?>
+		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>256)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'video'); ?>
+		<?php echo $form->textField($model,'video',array('size'=>60,'maxlength'=>256)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'file'); ?>
+		<?php echo $form->textField($model,'file',array('size'=>60,'maxlength'=>256)); ?>
 	</div>
 
 	<div class="row buttons">

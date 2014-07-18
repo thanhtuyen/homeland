@@ -224,7 +224,18 @@ class Category extends CActiveRecord
       self:: SPECIALITES_MENU => 'Đặc Sản'
     );
   }
-
+  /**
+   * @return string the URL that shows the detail of the post
+   */
+  public function getUrl( )
+  {
+    $name = "thanh-tuyen";
+   // $name= vn_str_filter($name);
+    return Yii::app()->createAbsoluteUrl('Natures/news', array(
+      'id'=> 12,
+      'name'=>$name,
+    ));
+  }
 
 
 }

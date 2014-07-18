@@ -21,11 +21,11 @@ return CMap::mergeArray(
         'caseSensitive'=>false,
 
 		    'rules'=>array(
-          '<language:(vi|en)>/' => 'site/index',
-		      '<lang:\w+>/post-<id:\d+>/<title:.*?>' => array('post/view', 'urlSuffix' => '/', 'caseSensitive' => false),
-	        '<lang:\w+>/<controller:\w+>/<id:\d+>'=>'<controller>/view',
-	        '<lang:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-	        '<lang:\w+>/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+          'dang-ky'=>array('natures/news', 'caseSensitive'=>false),
+          '<controller:\w+>/<action:\w+>/page/<page:\d+>'=>'<controller>/<action>',
+          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			    ),
 			),
 			'sourceLanguage'=>'en'
