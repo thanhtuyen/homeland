@@ -49,10 +49,13 @@ class NaturesController extends HomeController
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView()
 	{
+   // Post::model()->findAll('alias_column_name=:alias',array(':alias'=>$_GET['alias']));
+  // 'thien-nhien/tin-tuc/<alias>'=>array('natures/view',  'caseSensitive'=>false,),
+    $model= Natures::model()->findAll('title= :alias',array(':alias'=>$_GET['alias']));
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
 		));
 	}
 

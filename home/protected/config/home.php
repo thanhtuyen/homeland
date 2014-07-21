@@ -21,11 +21,13 @@ return CMap::mergeArray(
         'caseSensitive'=>false,
 
 		    'rules'=>array(
-          'dang-ky'=>array('natures/news', 'caseSensitive'=>false),
-          '<controller:\w+>/<action:\w+>/page/<page:\d+>'=>'<controller>/<action>',
-          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+          'thien-nhien'=>array('natures/'),
+          'thien-nhien/tin-tuc'=>array('natures/news'),
+          'thien-nhien/tin-tuc/<alias>'=>array('natures/view',  'caseSensitive'=>false,),
+          '<controller:\w+>/<id:\d+>' => '<controller>/view',
+          '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+          '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+
 			    ),
 			),
 			'sourceLanguage'=>'en'

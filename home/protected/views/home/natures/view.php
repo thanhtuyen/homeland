@@ -18,8 +18,9 @@ $this->menu=array(
 
 <h1>View Natures #<?php echo $model->id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
+<?php
+$this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model[0],
 	'attributes'=>array(
 		'id',
 		'title',

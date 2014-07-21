@@ -158,4 +158,12 @@ class Natures extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function getUrl()
+    {
+        return Yii::app()->createAbsoluteUrl('natures/news', array(
+        'slug'=>$this->slug
+      ));
+    }
+
 }

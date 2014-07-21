@@ -95,11 +95,11 @@
         $parent_menu = HomeController::getListParentMenuSortPriority(0);
         foreach($parent_menu as $pm){
           if($pm->menu_type == 1) {
-            echo ' <li  class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  $this->createUrl('natures/news'));
+            echo ' <li  class="has-submenu" id='.$pm->id.'>'.CHtml::link($pm->tieude,  array('/natures'));
             echo     '<ul class="sub-menu">';
                         $sub_menu_list = HomeController:: getListMenuByMenuType($pm->id, $pm->menu_type);
                       foreach($sub_menu_list as $sub_menu){
-                          echo'<li>'.CHtml::link($sub_menu->tieude,  Yii::app()->urlManager->createUrl('/natures/list', array('id'=> $sub_menu->id) )).'</li>';
+                          echo'<li>'.CHtml::link($sub_menu->tieude,  array('/natures/view', 'id'=> $sub_menu->id)).'</li>';
                       }
             echo     '</ul>';
 
